@@ -13,7 +13,14 @@
 &lt;h1 id="3-data-hosting-and-processing">3. Data Hosting and Processing&lt;/h1>
 &lt;p>The Services are hosted on AWS infrastructure located within the European Union (EU) - or in other regions if specifically contracted with customers. AWS acts as a data processor on behalf of Peak Defence.
 Langfuse is another data processor used for the hosted service (for deployments under Starter package, starting from Scaleup and Enterprise packages a different deployment model can be negotiated), under strict data protection agreements - they receive the queries data made against the service and responses to the queries, but not the original data / documents used to create answers.
-Users have the option to run a local version of the Services on AWS, or for Enterprise versions, a hosted version where no data leaves the customer&amp;rsquo;s premises.&lt;/p></description></item><item><title>Schedule a Demo</title><link>https://peakdefence.com/demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/demo/</guid><description>&lt;div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/roman-jasins?embed=true">&lt;/div>
+Users have the option to run a local version of the Services on AWS, or for Enterprise versions, a hosted version where no data leaves the customer&amp;rsquo;s premises.&lt;/p></description></item><item><title>About Peak Defence</title><link>https://peakdefence.com/company/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/company/</guid><description>&lt;!-- # About Peak Defence -->
+&lt;h2 id="our-mission">Our Mission&lt;/h2>
+&lt;p>Peak Defence exists to transform how organizations manage security through the perfect integration of People, Process, and Technology. We believe security should be intelligent, accessible, and effective for every organization.&lt;/p>
+&lt;h2 id="our-story">Our Story&lt;/h2>
+&lt;p>Founded by a team of security leaders willing to challenge the status quo and outdated approaches, Peak Defence was born from a simple observation: security management was broken. Organizations were drowning in manual processes, struggling with disconnected tools, and failing to achieve meaningful security outcomes.&lt;/p></description></item><item><title>Contact Us</title><link>https://peakdefence.com/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/contact/</guid><description>&lt;p>We&amp;rsquo;d love to hear from you! Whether you&amp;rsquo;re interested in learning more about our platform, scheduling a demo, or discussing how we can help with your security challenges, our team is here to assist.&lt;/p>
+&lt;p>Fill out the form below, and one of our specialists will get back to you shortly. For immediate assistance or to schedule a personalized demo, you can also email us directly at &lt;a href="mailto:contact@peakdefence.com">contact@peakdefence.com&lt;/a>.&lt;/p></description></item><item><title>Peak Defence Methodology</title><link>https://peakdefence.com/methodology/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/methodology/</guid><description>&lt;h2 id="introduction-a-balanced-approach-to-security">Introduction: A Balanced Approach to Security&lt;/h2>
+&lt;p>The Peak Defence Methodology represents a fundamental shift in how organizations approach information security. Rather than treating security as a series of technical controls or compliance checkboxes, our methodology centers on the perfect integration of &lt;strong>People&lt;/strong>, &lt;strong>Process&lt;/strong>, and &lt;strong>Technology&lt;/strong> to create resilient, proactive security programs that deliver measurable outcomes.&lt;/p>
+&lt;p>Our approach is born from years of experience witnessing the same patterns across organizations of all sizes: manual processes creating bottlenecks, reactive approaches leaving vulnerabilities unaddressed, and disconnected systems preventing comprehensive visibility. The Peak Defence Methodology, powered by our Wingman AI platform, breaks this cycle.&lt;/p></description></item><item><title>Schedule a Demo</title><link>https://peakdefence.com/demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/demo/</guid><description>&lt;div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/roman-jasins?embed=true">&lt;/div>
 &lt;script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js">&lt;/script>
 
 &lt;style>
@@ -29,20 +36,25 @@ Users have the option to run a local version of the Services on AWS, or for Ente
  height: 800px;
  }
  }
-&lt;/style></description></item><item><title>Terms of Service</title><link>https://peakdefence.com/terms-of-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/terms-of-service/</guid><description>&lt;p>Version: 2023-12-14/001&lt;/p>
-&lt;h1 id="1-acceptance-of-terms">1. Acceptance of Terms&lt;/h1>
-&lt;p>1.1 By accessing and using Peak Defence Virtual CISO services
-(&amp;ldquo;Services&amp;rdquo;), you agree to be bound by these Terms of Service
-(&amp;ldquo;Terms&amp;rdquo;). If you do not agree to all of these Terms, do not use the Services.&lt;/p>
-&lt;h1 id="2-service-description">2. Service Description&lt;/h1>
-&lt;p>2.1. Peak Defence Virtual CISO offering provides support for implementing and operating a compliance management system, strategic guidance, support policy and procedure development, and risk management advice related to information security compliance. It includes, but is not limited to, risk assessment, compliance management, and incident response planning and operations.&lt;/p></description></item><item><title>Thank You for Your Application</title><link>https://peakdefence.com/thank-you/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/thank-you/</guid><description>&lt;h2 id="application-received">Application Received&lt;/h2>
-&lt;p>Thank you for your interest in joining the Peak Defence team! We&amp;rsquo;ve received your application and our hiring team will review it soon.&lt;/p>
+&lt;/style></description></item><item><title>Terms of Service</title><link>https://peakdefence.com/terms-of-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/terms-of-service/</guid><description>&lt;p>These Terms of Service govern your use of the Peak Defence platform and services. By using our services, you agree to these terms which include important information about:&lt;/p>
+&lt;ul>
+&lt;li>Your responsibilities when using our platform&lt;/li>
+&lt;li>Subscription terms and payment obligations&lt;/li>
+&lt;li>Data ownership and confidentiality&lt;/li>
+&lt;li>Limitations of liability&lt;/li>
+&lt;li>Intellectual property rights&lt;/li>
+&lt;/ul>
+&lt;p>Please read these terms carefully before using our services.&lt;/p></description></item><item><title>Thank You for Your Application</title><link>https://peakdefence.com/thank-you/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/thank-you/</guid><description>&lt;hr>
+&lt;h2 id="layout-thank-you">title: &amp;ldquo;Thank You for Contacting Us&amp;rdquo;
+description: &amp;ldquo;Your message has been received and we&amp;rsquo;ll be in touch soon&amp;rdquo;
+layout: &amp;ldquo;thank-you&amp;rdquo;&lt;/h2>
+&lt;h2 id="message-received">Message Received&lt;/h2>
+&lt;p>Thank you for reaching out to Peak Defence! We&amp;rsquo;ve received your message and our team will review it promptly.&lt;/p>
 &lt;h3 id="what-happens-next">What happens next?&lt;/h3>
 &lt;ol>
-&lt;li>&lt;strong>Initial review&lt;/strong>: Our team will review your application within 1-2 business days&lt;/li>
-&lt;li>&lt;strong>Screening call&lt;/strong>: If your qualifications match our needs, we&amp;rsquo;ll reach out to schedule an initial conversation&lt;/li>
-&lt;li>&lt;strong>Interview process&lt;/strong>: Qualified candidates will proceed through our interview process, which typically includes technical discussions and team meetings&lt;/li>
-&lt;li>&lt;strong>Decision&lt;/strong>: We strive to make hiring decisions within 2-3 weeks of receiving applications&lt;/li>
+&lt;li>&lt;strong>Initial review&lt;/strong>: Our team will review your inquiry within 1 business day&lt;/li>
+&lt;li>&lt;strong>Response&lt;/strong>: A member of our team will reach out to you by email or phone to address your questions or schedule a meeting&lt;/li>
+&lt;li>&lt;strong>Follow-up&lt;/strong>: We&amp;rsquo;ll provide any additional information or resources that may be helpful based on your inquiry&lt;/li>
 &lt;/ol>
-&lt;h3 id="stay-connected">Stay connected&lt;/h3>
+&lt;h3 id="connect-with-us">Connect with us&lt;/h3>
 &lt;p>While you wait, you can learn more about Peak Defence:&lt;/p></description></item></channel></rss>
