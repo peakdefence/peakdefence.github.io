@@ -2,9 +2,9 @@
 const HUBSPOT_PORTAL_ID = '144004543';
 const HUBSPOT_FORMS = {
   contact: '38a469e8-0b58-4f1c-a366-73c025967494',
-  job_application: 'job-application-form',
-  partnership: 'partnership-form',
-  open_application: 'open-application-form'
+  job_application: '2de8f97b-1017-4a0b-bf46-b3529960d69f',
+  partnership: '8aec090e-bb14-402b-873f-acaf00071d67',
+  open_application: 'c0055920-ed4c-4c01-b747-99dfdbfb561b'
 };
 
 // Regular form submission handler (contact, partnership)
@@ -41,10 +41,10 @@ function submitToHubSpot(event, formType) {
   if (formData.get('message')) fields.push({name: 'message', value: formData.get('message')});
   
   // Form-specific fields
-  if (formType === 'contact' && formData.get('inquiry_type')) {
-    fields.push({name: 'inquiry_type', value: formData.get('inquiry_type')});
-  } else if (formType === 'partnership' && formData.get('partnership_type')) {
-    fields.push({name: 'partnership_type', value: formData.get('partnership_type')});
+  if (formType === 'contact' && formData.get('inquiry_type_description')) {
+    fields.push({name: 'inquiry_type', value: formData.get('inquiry_type_description')});
+  } else if (formType === 'partnership' && formData.get('partnership_type_description')) {
+    fields.push({name: 'partnership_type', value: formData.get('partnership_type_description')});
   }
   
   // Create data object for HubSpot
