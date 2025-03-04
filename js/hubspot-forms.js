@@ -1,5 +1,5 @@
 /**
- * HubSpot Forms Submission Handler
+ * HubSpot Forms Submission Handler with File Upload Support
  * 
  * This script handles form submissions to HubSpot for different form types:
  * - contact: Contact form submissions
@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle contact form (already working)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    // Keep existing functionality
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      submitToHubSpot(event, 'contact');
+    });
   }
 
   // Handle partnership form
@@ -39,15 +42,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Handle job application forms
-  const jobForms = document.querySelectorAll('form[id^="job-application-form"]');
-  jobForms.forEach(form => {
-    form.addEventListener('submit', function(event) {
+  const jobApplicationForm = document.getElementById('job-application-form');
+  if (jobApplicationForm) {
+    jobApplicationForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      // Check if it's a specific job or open application
-      const formType = form.id.includes('open') ? 'open-application' : 'job-application';
-      submitToHubSpot(event, formType);
+      submitToHubSpot(event, 'job-application', true);
     });
-  });
+  }
+
+  // Handle open application form
+  const openApplicationForm = document.getElementById('open-application-form');
+  if (openApplicationForm) {
+    openApplicationForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      submitToHubSpot(event, 'open-application', true);
+    });
+  }
 
   // Find any other forms with action="/thank-you" that might need HubSpot integration
   const thankyouForms = document.querySelectorAll('form[action="/thank-you"]');
@@ -59,6 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Determine form type based on hidden input or form ID
         let formType = 'contact'; // Default
+        let hasFileUpload = false;
+        
+        // Check if the form has file inputs
+        if (form.querySelector('input[type="file"]')) {
+          hasFileUpload = true;
+        }
         
         const hiddenFormType = form.querySelector('input[name="form_type"]');
         if (hiddenFormType && hiddenFormType.value) {
@@ -67,43 +83,71 @@ document.addEventListener('DOMContentLoaded', function() {
           formType = 'partnership';
         } else if (form.id.includes('job-application')) {
           formType = 'job-application';
+          hasFileUpload = true;
         } else if (form.id.includes('open-application')) {
           formType = 'open-application';
+          hasFileUpload = true;
         }
         
-        submitToHubSpot(event, formType);
+        submitToHubSpot(event, formType, hasFileUpload);
       });
     }
   });
+
+  // Check for button click handlers
+  const submitOpenApplicationBtn = document.querySelector('button[onclick="submitOpenApplication()"]');
+  if (submitOpenApplicationBtn) {
+    // Override the click handler
+    submitOpenApplicationBtn.onclick = function() {
+      const form = document.getElementById('open-application-form');
+      if (form) {
+        const event = new Event('submit', {
+          bubbles: true,
+          cancelable: true
+        });
+        form.dispatchEvent(event);
+      }
+    };
+  }
+
+  const submitJobApplicationBtn = document.querySelector('button[onclick="submitJobApplication()"]');
+  if (submitJobApplicationBtn) {
+    // Override the click handler
+    submitJobApplicationBtn.onclick = function() {
+      const form = document.getElementById('job-application-form');
+      if (form) {
+        const event = new Event('submit', {
+          bubbles: true,
+          cancelable: true
+        });
+        form.dispatchEvent(event);
+      }
+    };
+  }
 });
 
 /**
  * Submit form data to HubSpot
  * @param {Event} event - The form submission event
  * @param {string} formType - The type of form (contact, partnership, job-application, open-application)
+ * @param {boolean} hasFileUpload - Whether the form has file uploads
  */
-function submitToHubSpot(event, formType) {
-  event.preventDefault();
-  
-  const form = event.target;
-  const formData = new FormData(form);
-  const submissionData = {};
-  
-  // Convert FormData to object for HubSpot
-  for (const [key, value] of formData.entries()) {
-    // Skip file inputs for now - they require special handling
-    if (!(value instanceof File)) {
-      submissionData[key] = value;
-    }
+function submitToHubSpot(event, formType, hasFileUpload = false) {
+  if (event) {
+    event.preventDefault();
   }
   
-  // Log submission for debugging
-  console.log(`Submitting ${formType} form to HubSpot:`, submissionData);
+  const form = event ? event.target : document.getElementById(formType === 'open-application' ? 'open-application-form' : 'job-application-form');
+  if (!form) {
+    console.error('Form not found');
+    return;
+  }
   
   // Show loading state
-  const submitBtn = form.querySelector('input[type="submit"], button[type="submit"]');
+  const submitBtn = form.querySelector('input[type="submit"], button[type="submit"], button[type="button"]');
+  let originalText = '';
   if (submitBtn) {
-    const originalText = submitBtn.value || submitBtn.textContent;
+    originalText = submitBtn.value || submitBtn.textContent;
     submitBtn.disabled = true;
     if (submitBtn.tagName === 'INPUT') {
       submitBtn.value = 'Submitting...';
@@ -112,11 +156,31 @@ function submitToHubSpot(event, formType) {
     }
   }
   
+  // If this form has file uploads, we need to use a different approach
+  if (hasFileUpload) {
+    // Use native form submission to HubSpot with multipart/form-data
+    submitFormWithFileToHubSpot(form, formType, originalText, submitBtn);
+    return;
+  }
+  
+  // For forms without files, use the existing JSON submission method
+  const formData = new FormData(form);
+  const submissionData = {};
+  
+  // Convert FormData to object for HubSpot
+  for (const [key, value] of formData.entries()) {
+    submissionData[key] = value;
+  }
+  
+  // Log submission for debugging
+  console.log(`Submitting ${formType} form to HubSpot:`, submissionData);
+  
   // Create HubSpot form submission
   const formId = HUBSPOT_CONFIG.formIds[formType];
   if (!formId) {
     console.error(`No HubSpot form ID configured for form type: ${formType}`);
     showFormError(form, 'Configuration error. Please try again later or contact support.');
+    resetSubmitButton(submitBtn, originalText);
     return;
   }
   
@@ -153,14 +217,6 @@ function submitToHubSpot(event, formType) {
   .then(data => {
     console.log('HubSpot submission successful:', data);
     
-    // Handle file uploads separately if needed
-    const fileInputs = form.querySelectorAll('input[type="file"]');
-    if (fileInputs.length > 0) {
-      // For now, we're just redirecting without handling file uploads
-      // In a production environment, you'd want to implement file uploads to HubSpot
-      console.log('File uploads detected but not implemented in this version');
-    }
-    
     // Send form submission event to Google Tag Manager if available
     if (typeof dataLayer !== 'undefined') {
       dataLayer.push({
@@ -176,17 +232,120 @@ function submitToHubSpot(event, formType) {
   .catch(error => {
     console.error('HubSpot submission error:', error);
     showFormError(form, 'There was a problem submitting the form. Please try again.');
-    
-    // Reset submit button
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      if (submitBtn.tagName === 'INPUT') {
-        submitBtn.value = originalText;
-      } else {
-        submitBtn.textContent = originalText;
-      }
-    }
+    resetSubmitButton(submitBtn, originalText);
   });
+}
+
+/**
+ * Submit a form with file uploads directly to HubSpot
+ * @param {HTMLFormElement} form - The form element
+ * @param {string} formType - The type of form
+ * @param {string} originalText - Original button text
+ * @param {HTMLElement} submitBtn - The submit button
+ */
+function submitFormWithFileToHubSpot(form, formType, originalText, submitBtn) {
+  // Get the form ID from config
+  const formId = HUBSPOT_CONFIG.formIds[formType];
+  if (!formId) {
+    console.error(`No HubSpot form ID configured for form type: ${formType}`);
+    showFormError(form, 'Configuration error. Please try again later or contact support.');
+    resetSubmitButton(submitBtn, originalText);
+    return;
+  }
+  
+  // Create a new FormData object from the form
+  const formData = new FormData(form);
+  
+  // Log what we're submitting for debugging
+  console.log(`Submitting ${formType} form with file to HubSpot`);
+  let hasFile = false;
+  
+  for (const [key, value] of formData.entries()) {
+    if (value instanceof File && value.size > 0) {
+      console.log(`File input: ${key}, filename: ${value.name}, size: ${value.size} bytes`);
+      hasFile = true;
+    } else {
+      console.log(`Form field: ${key} = ${value}`);
+    }
+  }
+  
+  if (!hasFile) {
+    console.warn('No file found in the form data');
+  }
+  
+  // The URL for the HubSpot form submission API with files support
+  const url = `https://forms.hubspot.com/uploads/form/v2/${HUBSPOT_CONFIG.portalId}/${formId}`;
+  
+  // Ensure required HubSpot fields are present
+  ensureHiddenField(form, 'hs_context', JSON.stringify({
+    pageUri: window.location.href,
+    pageName: document.title
+  }));
+  
+  // Create a formData object for submission
+  const submitFormData = new FormData(form);
+  
+  // Use fetch API with formData instead of iframe
+  fetch(url, {
+    method: 'POST',
+    body: submitFormData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Form submission failed: ${response.status} ${response.statusText}`);
+    }
+    console.log('Form submitted successfully with file');
+    
+    // Send form submission event to Google Tag Manager if available
+    if (typeof dataLayer !== 'undefined') {
+      dataLayer.push({
+        'event': 'formSubmission',
+        'formType': formType,
+        'formLocation': form.id
+      });
+    }
+    
+    // Redirect to thank you page
+    window.location.href = '/thank-you';
+  })
+  .catch(error => {
+    console.error('Error submitting form with file:', error);
+    showFormError(form, 'There was a problem submitting the form. Please try again.');
+    resetSubmitButton(submitBtn, originalText);
+  });
+}
+
+/**
+ * Ensure a hidden field exists in the form
+ * @param {HTMLFormElement} form - The form element
+ * @param {string} name - Field name
+ * @param {string} value - Field value
+ */
+function ensureHiddenField(form, name, value) {
+  let field = form.querySelector(`input[name="${name}"]`);
+  if (!field) {
+    field = document.createElement('input');
+    field.type = 'hidden';
+    field.name = name;
+    form.appendChild(field);
+  }
+  field.value = value;
+}
+
+/**
+ * Reset the submit button to its original state
+ * @param {HTMLElement} submitBtn - The submit button
+ * @param {string} originalText - The original button text
+ */
+function resetSubmitButton(submitBtn, originalText) {
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    if (submitBtn.tagName === 'INPUT') {
+      submitBtn.value = originalText;
+    } else {
+      submitBtn.textContent = originalText;
+    }
+  }
 }
 
 /**
