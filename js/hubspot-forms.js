@@ -7,7 +7,11 @@ const HUBSPOT_FORMS = {
   open_application: 'c0055920-ed4c-4c01-b747-99dfdbfb561b'
 };
 
-// Regular form submission handler (contact, partnership)
+/**
+ * Handles regular form submissions (contact, partnership)
+ * @param {Event} event - Form submission event
+ * @param {string} formType - Type of form being submitted (contact, partnership)
+ */
 function submitToHubSpot(event, formType) {
   event.preventDefault();
   
@@ -16,23 +20,37 @@ function submitToHubSpot(event, formType) {
   const formData = new FormData(form);
   
   // Show loading state
-  const submitButton = form.querySelector('input[type="submit"], button[type="submit"]');
-  const originalText = submitButton.value || submitButton.innerText;
+  const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+  const originalText = submitButton.innerText || submitButton.value;
   submitButton.disabled = true;
-  submitButton.value = submitButton.innerText = 'Submitting...';
   
-  // Create feedback element if it doesn't exist
-  let feedbackEl = form.querySelector('.form-feedback');
+  // Handle button with or without span inside
+  const submitTextEl = submitButton.querySelector('#submit-text');
+  const submitLoaderEl = submitButton.querySelector('#submit-loader');
+  
+  if (submitTextEl && submitLoaderEl) {
+    submitTextEl.classList.add('hidden');
+    submitLoaderEl.classList.remove('hidden');
+  } else {
+    submitButton.innerText = submitButton.value = 'Submitting...';
+  }
+  
+  // Create or get feedback element
+  let feedbackEl = form.querySelector('#form-feedback');
   if (!feedbackEl) {
     feedbackEl = document.createElement('div');
-    feedbackEl.className = 'form-feedback mt-4 p-4 rounded';
+    feedbackEl.id = 'form-feedback';
+    feedbackEl.className = 'mt-4 p-4 rounded-lg hidden';
     form.appendChild(feedbackEl);
   }
+  
+  // Hide any existing feedback
+  feedbackEl.classList.add('hidden');
   
   // Prepare data for HubSpot
   const fields = [];
   
-  // Common fields
+  // Map common fields
   if (formData.get('firstName')) fields.push({name: 'firstname', value: formData.get('firstName')});
   if (formData.get('lastName')) fields.push({name: 'lastname', value: formData.get('lastName')});
   if (formData.get('email')) fields.push({name: 'email', value: formData.get('email')});
@@ -40,11 +58,11 @@ function submitToHubSpot(event, formType) {
   if (formData.get('company')) fields.push({name: 'company', value: formData.get('company')});
   if (formData.get('message')) fields.push({name: 'message', value: formData.get('message')});
   
-  // Form-specific fields
-  if (formType === 'contact' && formData.get('inquiry_type_description')) {
-    fields.push({name: 'inquiry_type', value: formData.get('inquiry_type_description')});
-  } else if (formType === 'partnership' && formData.get('partnership_type_description')) {
-    fields.push({name: 'partnership_type', value: formData.get('partnership_type_description')});
+  // Map form-specific fields
+  if (formType === 'contact') {
+    if (formData.get('inquiry_type')) fields.push({name: 'inquiry_type', value: formData.get('inquiry_type')});
+  } else if (formType === 'partnership') {
+    if (formData.get('partnership_type')) fields.push({name: 'partnership_type', value: formData.get('partnership_type')});
   }
   
   // Create data object for HubSpot
@@ -57,11 +75,14 @@ function submitToHubSpot(event, formType) {
     }
   };
   
-  // Determine which HubSpot form to submit to
+  // Get the appropriate form ID
   const formId = HUBSPOT_FORMS[formType] || HUBSPOT_FORMS.contact;
   
+  // Log the URL for debugging
+  console.log(`Submitting to: https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`);
+  
   // Submit to HubSpot
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}?region=eu1`, {
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -69,12 +90,24 @@ function submitToHubSpot(event, formType) {
     body: JSON.stringify(data)
   })
   .then(response => {
+    console.log('Response status:', response.status);
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      return response.text().then(text => {
+        console.error('Error response:', text);
+        throw new Error('Network response was not ok: ' + response.status);
+      });
     }
     return response.json();
   })
   .then(result => {
+    console.log('Success:', result);
+    // Track form submission in Google Analytics if available
+    if (typeof window.dataLayer !== 'undefined') {
+      window.dataLayer.push({
+        'event': 'formSubmission',
+        'formType': formType
+      });
+    }
     // Redirect to thank you page
     window.location.href = '/thank-you';
   })
@@ -82,16 +115,29 @@ function submitToHubSpot(event, formType) {
     console.error('Error:', error);
     
     // Show error message
-    feedbackEl.innerHTML = 'There was a problem submitting your form. Please try again.';
-    feedbackEl.classList.add('bg-alert-red/10', 'text-alert-red', 'border', 'border-alert-red');
+    feedbackEl.innerHTML = `
+      <div class="p-4 bg-alert-red/10 border border-alert-red rounded-md text-alert-red">
+        <p>There was a problem submitting your form. Please try again or contact us directly.</p>
+      </div>
+    `;
+    feedbackEl.classList.remove('hidden');
     
     // Reset submit button
+    if (submitTextEl && submitLoaderEl) {
+      submitTextEl.classList.remove('hidden');
+      submitLoaderEl.classList.add('hidden');
+    } else {
+      submitButton.innerText = submitButton.value = originalText;
+    }
     submitButton.disabled = false;
-    submitButton.value = submitButton.innerText = originalText;
   });
 }
 
-// Job application form handler (with file uploads)
+/**
+ * Handles job application form submissions with file uploads
+ * @param {Event} event - Form submission event
+ * @param {string} jobTitle - Job title from the page
+ */
 function submitJobApplication(event, jobTitle) {
   event.preventDefault();
   
@@ -100,81 +146,127 @@ function submitJobApplication(event, jobTitle) {
   const formData = new FormData(form);
   
   // Show loading state
-  const submitButton = form.querySelector('input[type="submit"], button[type="submit"]');
-  const originalText = submitButton.value || submitButton.innerText;
+  const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+  const originalText = submitButton.innerText || submitButton.value;
   submitButton.disabled = true;
-  submitButton.value = submitButton.innerText = 'Submitting...';
   
-  // Create feedback element if it doesn't exist
-  let feedbackEl = form.querySelector('.form-feedback');
+  // Handle button with or without span inside
+  const submitTextEl = submitButton.querySelector('#job-submit-text');
+  const submitLoaderEl = submitButton.querySelector('#job-submit-loader');
+  
+  if (submitTextEl && submitLoaderEl) {
+    submitTextEl.classList.add('hidden');
+    submitLoaderEl.classList.remove('hidden');
+  } else {
+    submitButton.innerText = submitButton.value = 'Submitting...';
+  }
+  
+  // Create or get feedback element
+  let feedbackEl = form.querySelector('#job-form-feedback');
   if (!feedbackEl) {
     feedbackEl = document.createElement('div');
-    feedbackEl.className = 'form-feedback mt-4 p-4 rounded';
+    feedbackEl.id = 'job-form-feedback';
+    feedbackEl.className = 'mt-4 p-4 rounded-lg hidden';
     form.appendChild(feedbackEl);
   }
   
-  // Prepare fields array
+  // Hide any existing feedback
+  feedbackEl.classList.add('hidden');
+  
+  // Prepare data for HubSpot
   const fields = [];
   
-  // Add common fields
+  // Map common fields
   if (formData.get('firstName')) fields.push({name: 'firstname', value: formData.get('firstName')});
   if (formData.get('lastName')) fields.push({name: 'lastname', value: formData.get('lastName')});
   if (formData.get('email')) fields.push({name: 'email', value: formData.get('email')});
   if (formData.get('phone')) fields.push({name: 'phone', value: formData.get('phone')});
-  if (formData.get('linkedin')) fields.push({name: 'linkedin', value: formData.get('linkedin')});
+  if (formData.get('linkedin')) fields.push({name: 'linkedin_url', value: formData.get('linkedin')});
   if (formData.get('message')) fields.push({name: 'why_interested', value: formData.get('message')});
   
-  // Add job-specific fields
+  // Map job-specific fields
   if (jobTitle) fields.push({name: 'job_title', value: jobTitle});
+  if (formData.get('job_title')) fields.push({name: 'job_title', value: formData.get('job_title')});
   if (formData.get('department')) fields.push({name: 'department', value: formData.get('department')});
   
   // Handle resume file
-  const resumeFile = form.querySelector('#resume').files[0];
-  if (!resumeFile) {
-    // Show error if resume is required
-    feedbackEl.innerHTML = 'Please upload your resume.';
-    feedbackEl.classList.add('bg-alert-red/10', 'text-alert-red', 'border', 'border-alert-red');
+  const resumeFileElement = form.querySelector('#resume');
+  if (!resumeFileElement || !resumeFileElement.files || resumeFileElement.files.length === 0) {
+    // Show error message for missing resume
+    feedbackEl.innerHTML = `
+      <div class="p-4 bg-alert-red/10 border border-alert-red rounded-md text-alert-red">
+        <p>Please upload your resume to complete your application.</p>
+      </div>
+    `;
+    feedbackEl.classList.remove('hidden');
     
     // Reset submit button
+    if (submitTextEl && submitLoaderEl) {
+      submitTextEl.classList.remove('hidden');
+      submitLoaderEl.classList.add('hidden');
+    } else {
+      submitButton.innerText = submitButton.value = originalText;
+    }
     submitButton.disabled = false;
-    submitButton.value = submitButton.innerText = originalText;
     return;
   }
   
-  // Convert resume to Base64
+  const resumeFile = resumeFileElement.files[0];
   const resumeReader = new FileReader();
-  resumeReader.readAsDataURL(resumeFile);
+  
   resumeReader.onload = function() {
     // Remove the data URI prefix (e.g., "data:application/pdf;base64,")
     const resumeBase64 = resumeReader.result.split(',')[1];
     
-    // Handle optional cover letter file
-    const coverLetterFile = form.querySelector('#coverLetter').files[0];
-    
-    // Function to proceed with form submission
-    const proceedWithSubmission = (coverLetterBase64 = null) => {
-      // Add resume to fields
-      fields.push({
-        name: 'resume',
-        value: {
-          data: resumeBase64,
-          fileName: resumeFile.name,
-          contentType: resumeFile.type
-        }
-      });
-      
-      // Add cover letter to fields if provided
-      if (coverLetterBase64) {
-        fields.push({
-          name: 'cover_letter',
-          value: {
-            data: coverLetterBase64,
-            fileName: coverLetterFile.name,
-            contentType: coverLetterFile.type
-          }
-        });
+    // Add resume to fields
+    fields.push({
+      name: 'resume',
+      value: {
+        data: resumeBase64,
+        fileName: resumeFile.name,
+        contentType: resumeFile.type
       }
-      
+    });
+    
+    // Handle optional cover letter
+    const coverLetterElement = form.querySelector('#coverLetter');
+    const processCoverLetter = () => {
+      if (coverLetterElement && coverLetterElement.files && coverLetterElement.files.length > 0) {
+        const coverLetterFile = coverLetterElement.files[0];
+        const coverLetterReader = new FileReader();
+        
+        coverLetterReader.onload = function() {
+          const coverLetterBase64 = coverLetterReader.result.split(',')[1];
+          
+          // Add cover letter to fields
+          fields.push({
+            name: 'cover_letter',
+            value: {
+              data: coverLetterBase64,
+              fileName: coverLetterFile.name,
+              contentType: coverLetterFile.type
+            }
+          });
+          
+          // Now submit with both files
+          submitJobData(fields);
+        };
+        
+        coverLetterReader.onerror = function() {
+          // Submit without cover letter if there's an error
+          console.error('Error reading cover letter:', coverLetterReader.error);
+          submitJobData(fields);
+        };
+        
+        coverLetterReader.readAsDataURL(coverLetterFile);
+      } else {
+        // No cover letter, submit with just resume
+        submitJobData(fields);
+      }
+    };
+    
+    // Function to submit job application data to HubSpot
+    function submitJobData(fields) {
       // Create data object for HubSpot
       const data = {
         submittedAt: Date.now(),
@@ -189,8 +281,11 @@ function submitJobApplication(event, jobTitle) {
       const formType = jobTitle ? 'job_application' : 'open_application';
       const formId = HUBSPOT_FORMS[formType];
       
+      // Log URL for debugging
+      console.log(`Submitting job application to: https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`);
+      
       // Submit to HubSpot
-      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}?region=eu1`, {
+      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -198,12 +293,24 @@ function submitJobApplication(event, jobTitle) {
         body: JSON.stringify(data)
       })
       .then(response => {
+        console.log('Response status:', response.status);
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          return response.text().then(text => {
+            console.error('Error response:', text);
+            throw new Error('Network response was not ok: ' + response.status);
+          });
         }
         return response.json();
       })
       .then(result => {
+        console.log('Success:', result);
+        // Track form submission in Google Analytics if available
+        if (typeof window.dataLayer !== 'undefined') {
+          window.dataLayer.push({
+            'event': 'formSubmission',
+            'formType': formType
+          });
+        }
         // Redirect to thank you page
         window.location.href = '/thank-you';
       })
@@ -211,39 +318,49 @@ function submitJobApplication(event, jobTitle) {
         console.error('Error:', error);
         
         // Show error message
-        feedbackEl.innerHTML = 'There was a problem submitting your application. Please try again.';
-        feedbackEl.classList.add('bg-alert-red/10', 'text-alert-red', 'border', 'border-alert-red');
+        feedbackEl.innerHTML = `
+          <div class="p-4 bg-alert-red/10 border border-alert-red rounded-md text-alert-red">
+            <p>There was a problem submitting your application. Please try again or contact us directly.</p>
+          </div>
+        `;
+        feedbackEl.classList.remove('hidden');
         
         // Reset submit button
+        if (submitTextEl && submitLoaderEl) {
+          submitTextEl.classList.remove('hidden');
+          submitLoaderEl.classList.add('hidden');
+        } else {
+          submitButton.innerText = submitButton.value = originalText;
+        }
         submitButton.disabled = false;
-        submitButton.value = submitButton.innerText = originalText;
       });
-    };
-    
-    // If cover letter is provided, process it before submission
-    if (coverLetterFile) {
-      const coverLetterReader = new FileReader();
-      coverLetterReader.readAsDataURL(coverLetterFile);
-      coverLetterReader.onload = function() {
-        const coverLetterBase64 = coverLetterReader.result.split(',')[1];
-        proceedWithSubmission(coverLetterBase64);
-      };
-      coverLetterReader.onerror = function() {
-        // Proceed without cover letter if there's an error
-        proceedWithSubmission();
-      };
-    } else {
-      // Proceed without cover letter
-      proceedWithSubmission();
     }
+    
+    // Start process to handle cover letter
+    processCoverLetter();
   };
   
   resumeReader.onerror = function() {
-    feedbackEl.innerHTML = 'Error reading resume file. Please try again with a different file.';
-    feedbackEl.classList.add('bg-alert-red/10', 'text-alert-red', 'border', 'border-alert-red');
+    console.error('Error reading resume:', resumeReader.error);
+    
+    // Show error message
+    feedbackEl.innerHTML = `
+      <div class="p-4 bg-alert-red/10 border border-alert-red rounded-md text-alert-red">
+        <p>Error reading resume file. Please try again with a different file format or contact us directly.</p>
+      </div>
+    `;
+    feedbackEl.classList.remove('hidden');
     
     // Reset submit button
+    if (submitTextEl && submitLoaderEl) {
+      submitTextEl.classList.remove('hidden');
+      submitLoaderEl.classList.add('hidden');
+    } else {
+      submitButton.innerText = submitButton.value = originalText;
+    }
     submitButton.disabled = false;
-    submitButton.value = submitButton.innerText = originalText;
   };
+  
+  // Start reading the resume file
+  resumeReader.readAsDataURL(resumeFile);
 }
