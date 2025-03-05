@@ -6,6 +6,7 @@
  * - partnership: Partnership inquiry form submissions
  * - job-application: Job application form submissions
  * - open-application: Open job application form submissions
+ * - newsletter: Newsletter subscription
  */
 
 // HubSpot portal ID and form IDs
@@ -15,7 +16,8 @@ const HUBSPOT_CONFIG = {
     contact: '38a469e8-0b58-4f1c-a366-73c025967494', // Contact form
     partnership: '8aec090e-bb14-402b-873f-acaf00071d67', // Partnership form
     'job-application': '2de8f97b-1017-4a0b-bf46-b3529960d69f', // Job application
-    'open-application': 'c0055920-ed4c-4c01-b747-99dfdbfb561b' // Open application
+    'open-application': 'c0055920-ed4c-4c01-b747-99dfdbfb561b', // Open application
+    'newsletter': 'b5cd17ad-7bfa-4d46-8d1d-531fe7cebbe0' // Newsletter subscription
   }
 };
 
@@ -59,6 +61,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Handle newsletter form
+  const newsletterForm = document.getElementById('newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      submitToHubSpot(event, 'newsletter', false, true);
+    });
+  }
+
   // Find any other forms with action="/thank-you" that might need HubSpot integration
   const thankyouForms = document.querySelectorAll('form[action="/thank-you"]');
   thankyouForms.forEach(form => {
@@ -70,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Determine form type based on hidden input or form ID
         let formType = 'contact'; // Default
         let hasFileUpload = false;
+        let isNewsletter = false;
         
         // Check if the form has file inputs
         if (form.querySelector('input[type="file"]')) {
@@ -79,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const hiddenFormType = form.querySelector('input[name="form_type"]');
         if (hiddenFormType && hiddenFormType.value) {
           formType = hiddenFormType.value;
+          
+          // Special handling for newsletter
+          if (formType === 'newsletter') {
+            isNewsletter = true;
+          }
         } else if (form.id.includes('partnership')) {
           formType = 'partnership';
         } else if (form.id.includes('job-application')) {
@@ -87,9 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (form.id.includes('open-application')) {
           formType = 'open-application';
           hasFileUpload = true;
+        } else if (form.id.includes('newsletter')) {
+          formType = 'newsletter';
+          isNewsletter = true;
         }
         
-        submitToHubSpot(event, formType, hasFileUpload);
+        submitToHubSpot(event, formType, hasFileUpload, isNewsletter);
       });
     }
   });
@@ -129,10 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * Submit form data to HubSpot
  * @param {Event} event - The form submission event
- * @param {string} formType - The type of form (contact, partnership, job-application, open-application)
+ * @param {string} formType - The type of form (contact, partnership, job-application, open-application, newsletter)
  * @param {boolean} hasFileUpload - Whether the form has file uploads
+ * @param {boolean} isNewsletter - Whether this is a newsletter form
  */
-function submitToHubSpot(event, formType, hasFileUpload = false) {
+function submitToHubSpot(event, formType, hasFileUpload = false, isNewsletter = false) {
   if (event) {
     event.preventDefault();
   }
@@ -226,8 +247,14 @@ function submitToHubSpot(event, formType, hasFileUpload = false) {
       });
     }
     
-    // Redirect to thank you page
-    window.location.href = '/thank-you';
+    // Special handling for newsletter form
+    if (isNewsletter) {
+      // Show success message inline
+      showNewsletterSuccess(form);
+    } else {
+      // Redirect to thank you page for other forms
+      window.location.href = '/thank-you';
+    }
   })
   .catch(error => {
     console.error('HubSpot submission error:', error);
@@ -313,6 +340,22 @@ function submitFormWithFileToHubSpot(form, formType, originalText, submitBtn) {
     showFormError(form, 'There was a problem submitting the form. Please try again.');
     resetSubmitButton(submitBtn, originalText);
   });
+}
+
+/**
+ * Show success message for newsletter subscription
+ * @param {HTMLFormElement} form - The newsletter form
+ */
+function showNewsletterSuccess(form) {
+  // Create success message
+  const formParent = form.parentElement;
+  form.style.display = 'none'; // Hide the form
+  
+  // Create and add success message
+  const successMessage = document.createElement('div');
+  successMessage.className = 'bg-alert-green/10 text-alert-green p-4 rounded-md mt-4 max-w-md mx-auto';
+  successMessage.innerHTML = '<p class="font-medium">Thanks for subscribing!</p><p>You\'ll start receiving our security insights and updates soon.</p>';
+  formParent.appendChild(successMessage);
 }
 
 /**
