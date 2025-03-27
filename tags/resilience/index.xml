@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Resilience on Peak Defence - Your Cybersecurity Wingman</title><link>https://peakdefence.com/tags/resilience/</link><description>Recent content in Resilience on Peak Defence - Your Cybersecurity Wingman</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 27 Mar 2025 06:05:57 +0100</lastBuildDate><atom:link href="https://peakdefence.com/tags/resilience/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction to the Peak Defence Method</title><link>https://peakdefence.com/method/</link><pubDate>Tue, 18 Mar 2025 00:00:00 +0000</pubDate><guid>https://peakdefence.com/method/</guid><description>&lt;h2 id="why-this-methodology-exists">Why This Methodology Exists&lt;/h2>
+&lt;blockquote>
+&lt;p>Security in today&amp;rsquo;s organizations faces a fundamental challenge: the approaches that worked in the past are failing to deliver sustainable value in increasingly complex, fast-moving environments.&lt;/p>&lt;/blockquote>
+&lt;p>This statement is likely to stay true for as long as environments we operate in keep changing, and that might always be the case, at least for most of the organizations. Despite growing security investments, many struggle with:&lt;/p>
+&lt;ul>
+&lt;li>Security teams isolated from the business, creating friction rather than enablement&lt;/li>
+&lt;li>Security controls that focus on prevention but fail to adapt when breaches occur&lt;/li>
+&lt;li>Security work that expands indefinitely without clear boundaries or completion&lt;/li>
+&lt;li>Siloed approaches that prevent effective cross-functional collaboration&lt;/li>
+&lt;li>Rigid methodologies that don&amp;rsquo;t scale with organizational growth&lt;/li>
+&lt;/ul>
+&lt;p>The Peak Defence Method addresses these challenges through a fundamentally different approach to security — one that prioritizes resilience over rigid prevention, balances centralized expertise with distributed responsibility, and delivers visible value through bounded, focused work.&lt;/p></description></item><item><title>Core Principles and Philosophy</title><link>https://peakdefence.com/method/core/</link><pubDate>Tue, 18 Mar 2025 00:00:00 +0000</pubDate><guid>https://peakdefence.com/method/core/</guid><description>&lt;!-- # Core Principles of Peak Defence Method -->
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Security approaches often fail not because of poor implementation, but because they&amp;rsquo;re built on flawed assumptions about the nature of security itself. The Peak Defence Method is founded on a different perspective — one that acknowledges the inherent complexity and unpredictability of modern systems.&lt;/p>
+&lt;p>This chapter explains the philosophical foundation and core principles that guide our approach across organizations of all sizes and maturity levels. These principles inform every aspect of the methodology, from how we &lt;a href="shaping.md">shape work&lt;/a> to how we implement security controls and measure security effectiveness.&lt;/p></description></item><item><title>Shaping Security Work</title><link>https://peakdefence.com/method/shaping/</link><pubDate>Tue, 18 Mar 2025 00:00:00 +0000</pubDate><guid>https://peakdefence.com/method/shaping/</guid><description>&lt;!-- # Shaping Security Work -->
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Security initiatives fail for many reasons, but often there is a common pattern: &lt;strong>they&amp;rsquo;re either too vague or too specific before implementation begins&lt;/strong>. Traditional approaches oscillate between these extremes:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Too abstract&lt;/strong>: &amp;ldquo;Implement zero trust architecture&amp;rdquo; or &amp;ldquo;Improve our security posture&amp;rdquo; lack clear boundaries and direction&lt;/li>
+&lt;li>&lt;strong>Too concrete&lt;/strong>: Detailed specifications that over-constrain implementation teams and can&amp;rsquo;t adapt to discoveries made during implementation&lt;/li>
+&lt;/ul>
+&lt;p>Shaping security work is the critical process that bridges this gap. It creates &lt;strong>just enough structure&lt;/strong> to enable teams to deliver meaningful security improvements within fixed time constraints, while leaving room for adaptation and expertise.&lt;/p></description></item></channel></rss>
