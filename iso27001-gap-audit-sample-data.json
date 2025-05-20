@@ -1,0 +1,174 @@
+{
+  "executive_summary": {
+    "organization": "BetaTech Solutions",
+    "business_context": "BetaTech Solutions develops cloud-based analytics tools for financial institutions. Protecting client data and ensuring regulatory compliance are central to its business operations.",
+    "security_state": "The organization has implemented several security measures, but gaps remain in risk assessment, documented procedures, and evidence of control operation. Stakeholders include executive management, IT, compliance, and department heads.",
+    "stakeholders": [
+      "CEO: Alex Turner",
+      "CISO: Priya Singh",
+      "Compliance Manager: Marco Rossi"
+    ],
+    "summary_of_findings": "The audit identified non-conformities and improvement opportunities, mainly in risk assessment documentation, incident management, and evidence of control operation."
+  },
+  "requirements": [
+    {
+      "id": "4",
+      "title": "Context of the Organization",
+      "description": "Understanding the organization and its context, needs and expectations of interested parties, and defining the scope of the ISMS."
+    },
+    {
+      "id": "6",
+      "title": "Planning",
+      "description": "Actions to address risks and opportunities, information security objectives, and planning to achieve them."
+    },
+    {
+      "id": "9",
+      "title": "Performance Evaluation",
+      "description": "Monitoring, measurement, analysis, evaluation, internal audit, and management review of the ISMS."
+    },
+    {
+      "id": "A.5.12",
+      "title": "Classification of Information",
+      "description": "Information shall be classified and protected according to its sensitivity and criticality."
+    },
+    {
+      "id": "A.5.23",
+      "title": "Information Security Incident Management",
+      "description": "Information security events shall be reported and responded to in a timely manner."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FND-101",
+      "title": "Incomplete Risk Assessment Records",
+      "type": "Non-conformity",
+      "description": "Risk assessments are performed but not consistently documented, making it difficult to demonstrate compliance with clause 6 requirements.",
+      "related_documents": ["DOC-101"],
+      "related_interviews": ["INT-101"],
+      "related_activities": ["ACT-101"],
+      "iso27001_requirements": ["6"]
+    },
+    {
+      "id": "FND-102",
+      "title": "No Formal Information Classification Procedure",
+      "type": "Opportunity for Improvement",
+      "description": "There is no documented procedure for information classification, increasing the risk of mishandling sensitive data.",
+      "related_documents": ["DOC-102"],
+      "related_interviews": ["INT-102"],
+      "related_activities": ["ACT-102"],
+      "iso27001_requirements": ["A.5.12"]
+    },
+    {
+      "id": "FND-103",
+      "title": "Incident Response Not Timely Documented",
+      "type": "Non-conformity",
+      "description": "Security incidents are verbally communicated but not formally recorded or reviewed, which may delay corrective actions.",
+      "related_documents": ["DOC-103"],
+      "related_interviews": ["INT-103"],
+      "related_activities": ["ACT-103"],
+      "iso27001_requirements": ["A.5.23"]
+    }
+  ],
+  "activities": [
+    {
+      "id": "ACT-101",
+      "title": "Standardize Risk Assessment Documentation",
+      "definition": "Develop and implement a standardized template and process for documenting all risk assessments.",
+      "context_specific_explanation": "Consistent documentation is required to demonstrate compliance and support risk treatment decisions.",
+      "definition_of_done": "All risk assessments are recorded using the approved template and reviewed quarterly.",
+      "accountable_role": "Risk Manager",
+      "iso27001_relevance": "Addresses clause 6 on planning and risk management.",
+      "subtasks": [
+        "Draft risk assessment template",
+        "Train staff on usage",
+        "Audit completed assessments"
+      ],
+      "effort_estimate_hours": 12,
+      "action_type": "regular",
+      "mandatoriness": "Strictly mandatory",
+      "related_findings": ["FND-101"],
+      "depends_on": []
+    },
+    {
+      "id": "ACT-102",
+      "title": "Develop Information Classification Policy",
+      "definition": "Create and approve a formal policy for classifying and handling information assets.",
+      "context_specific_explanation": "A policy ensures sensitive information is properly protected and handled.",
+      "definition_of_done": "Policy is approved, communicated, and implemented across the organization.",
+      "accountable_role": "Compliance Manager",
+      "iso27001_relevance": "Supports Annex A.5.12 on information classification.",
+      "subtasks": [
+        "Draft policy",
+        "Obtain management approval",
+        "Train staff"
+      ],
+      "effort_estimate_hours": 10,
+      "action_type": "one-off",
+      "mandatoriness": "Mandatory",
+      "related_findings": ["FND-102"],
+      "depends_on": []
+    },
+    {
+      "id": "ACT-103",
+      "title": "Implement Incident Reporting Procedure",
+      "definition": "Establish a documented process for reporting and recording information security incidents.",
+      "context_specific_explanation": "Formalizing incident reporting improves response times and supports continual improvement.",
+      "definition_of_done": "All incidents are logged and reviewed within 24 hours of occurrence.",
+      "accountable_role": "IT Security Lead",
+      "iso27001_relevance": "Addresses Annex A.5.23 on incident management.",
+      "subtasks": [
+        "Draft incident reporting form",
+        "Train employees",
+        "Review incident logs monthly"
+      ],
+      "effort_estimate_hours": 8,
+      "action_type": "regular",
+      "mandatoriness": "Recommended",
+      "related_findings": ["FND-103"],
+      "depends_on": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-101",
+      "title": "Risk Assessment Template.docx",
+      "summary": "Template for documenting risk assessments, including risk owner, likelihood, impact, and treatment plan.",
+      "iso27001_requirements": ["6"]
+    },
+    {
+      "id": "DOC-102",
+      "title": "Information Classification Policy.pdf",
+      "summary": "Draft policy outlining classification levels and handling requirements for information assets.",
+      "iso27001_requirements": ["A.5.12"]
+    },
+    {
+      "id": "DOC-103",
+      "title": "Incident Log.xlsx",
+      "summary": "Spreadsheet for recording and tracking information security incidents.",
+      "iso27001_requirements": ["A.5.23"]
+    }
+  ],
+  "interviews": [
+    {
+      "id": "INT-101",
+      "subject": "2025-05-19 14:00 CEST Risk Manager",
+      "date": "2025-05-19",
+      "time": "14:00",
+      "notes": "Confirmed risk assessments are performed but not consistently documented."
+    },
+    {
+      "id": "INT-102",
+      "subject": "2025-05-19 15:00 CEST Compliance Manager",
+      "date": "2025-05-19",
+      "time": "15:00",
+      "notes": "Acknowledged absence of a formal information classification policy."
+    },
+    {
+      "id": "INT-103",
+      "subject": "2025-05-19 16:00 CEST IT Security Lead",
+      "date": "2025-05-19",
+      "time": "16:00",
+      "notes": "Stated that incidents are discussed in meetings but not formally logged."
+    }
+  ]
+}

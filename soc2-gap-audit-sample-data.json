@@ -1,0 +1,148 @@
+{
+  "executive_summary": {
+    "organization": "Acme Corp",
+    "business_context": "Acme Corp is a SaaS provider specializing in HR management solutions for mid-sized enterprises. Security of client and employee data is a top priority due to the sensitive nature of the information processed.",
+    "security_state": "The organization has established foundational security controls but faces gaps in access management, monitoring, and documentation. Stakeholders include executive leadership, IT, HR, and compliance officers.",
+    "stakeholders": [
+      "CEO: Jane Doe",
+      "CTO: John Smith",
+      "Compliance Officer: Emily Zhang"
+    ],
+    "summary_of_findings": "The audit identified several non-conformities and opportunities for improvement, primarily related to access controls, incident response documentation, and periodic risk assessments."
+  },
+  "requirements": [
+    {
+      "id": "CC6.1",
+      "title": "Logical Access Controls",
+      "description": "Controls to restrict logical access to system resources and data to authorized users."
+    },
+    {
+      "id": "CC6.2",
+      "title": "User Access Reviews",
+      "description": "Controls to review user access rights at regular intervals."
+    },
+    {
+      "id": "CC7.2",
+      "title": "Incident Response",
+      "description": "Controls to ensure timely response to identified security incidents."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FND-001",
+      "title": "Unauthorized Access to Sensitive Data",
+      "type": "Non-conformity",
+      "description": "User access controls are not consistently enforced on the HR system, allowing unauthorized staff to view sensitive employee records.",
+      "related_documents": ["DOC-001", "DOC-002"],
+      "related_interviews": ["INT-001"],
+      "related_activities": ["ACT-001", "ACT-002"],
+      "soc2_requirements": ["CC6.1", "CC6.2"]
+    },
+    {
+      "id": "FND-002",
+      "title": "Lack of Incident Response Plan",
+      "type": "Opportunity for Improvement",
+      "description": "There is no documented incident response plan, which may delay or hinder effective response to security incidents.",
+      "related_documents": ["DOC-003"],
+      "related_interviews": ["INT-002"],
+      "related_activities": ["ACT-003"],
+      "soc2_requirements": ["CC7.2"]
+    }
+  ],
+  "activities": [
+    {
+      "id": "ACT-001",
+      "title": "Implement Quarterly Access Reviews",
+      "definition": "Establish a process to review and update user access rights to all sensitive systems every quarter.",
+      "context_specific_explanation": "Given Acme Corp’s high staff turnover, frequent reviews are necessary to minimize risk.",
+      "definition_of_done": "Documented evidence of quarterly reviews and removal of unnecessary access.",
+      "accountable_role": "IT Security Manager",
+      "soc2_relevance": "Directly addresses SOC 2 CC6.1 and CC6.2 requirements for logical access controls.",
+      "subtasks": [
+        "Inventory all user accounts",
+        "Review access rights",
+        "Document changes",
+        "Report results to compliance"
+      ],
+      "effort_estimate_hours": 16,
+      "action_type": "regular",
+      "mandatoriness": "Strictly mandatory",
+      "related_findings": ["FND-001"],
+      "depends_on": []
+    },
+    {
+      "id": "ACT-002",
+      "title": "Enforce Role-Based Access Controls",
+      "definition": "Configure HR system permissions to ensure only authorized roles can access sensitive data.",
+      "context_specific_explanation": "Prevents unauthorized access and supports least privilege principle.",
+      "definition_of_done": "Access logs show only authorized users accessing sensitive records.",
+      "accountable_role": "HR Systems Administrator",
+      "soc2_relevance": "Supports compliance with SOC 2 CC6.1.",
+      "subtasks": [
+        "Define roles and permissions",
+        "Update system configurations",
+        "Test access restrictions"
+      ],
+      "effort_estimate_hours": 24,
+      "action_type": "one-off",
+      "mandatoriness": "Mandatory",
+      "related_findings": ["FND-001"],
+      "depends_on": ["ACT-001"]
+    },
+    {
+      "id": "ACT-003",
+      "title": "Develop and Document Incident Response Plan",
+      "definition": "Create a formal incident response plan and train staff on procedures.",
+      "context_specific_explanation": "Ensures preparedness for security incidents and regulatory compliance.",
+      "definition_of_done": "Incident response plan approved and distributed; training completed.",
+      "accountable_role": "Compliance Officer",
+      "soc2_relevance": "Addresses SOC 2 CC7.2 requirement for incident response.",
+      "subtasks": [
+        "Draft incident response policy",
+        "Review with stakeholders",
+        "Conduct staff training"
+      ],
+      "effort_estimate_hours": 40,
+      "action_type": "one-off",
+      "mandatoriness": "Recommended",
+      "related_findings": ["FND-002"],
+      "depends_on": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "title": "HR Access Policy.pdf",
+      "summary": "Outlines procedures for granting and revoking access to HR systems.",
+      "soc2_requirements": ["CC6.1", "CC6.2"]
+    },
+    {
+      "id": "DOC-002",
+      "title": "System Access Logs.csv",
+      "summary": "Exported logs showing user access to HR system over the past year.",
+      "soc2_requirements": ["CC6.1"]
+    },
+    {
+      "id": "DOC-003",
+      "title": "Security Policies Handbook.pdf",
+      "summary": "Comprehensive set of security policies, missing incident response section.",
+      "soc2_requirements": ["CC7.2"]
+    }
+  ],
+  "interviews": [
+    {
+      "id": "INT-001",
+      "subject": "IT Security Manager",
+      "date": "2025-05-20",
+      "time": "09:00",
+      "notes": "Confirmed lack of regular access reviews and difficulties in tracking user permissions."
+    },
+    {
+      "id": "INT-002",
+      "subject": "Compliance Officer",
+      "date": "2025-05-20",
+      "time": "10:00",
+      "notes": "Acknowledged absence of a formal incident response plan and intent to prioritize its development."
+    }
+  ]
+}
