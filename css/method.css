@@ -1,0 +1,10 @@
+/* Placeholder for method component styles - you can customize as needed */
+.method-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-list-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}

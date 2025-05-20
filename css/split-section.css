@@ -1,0 +1,11 @@
+/* Placeholder for split-section component styles - you can customize as needed */
+.split-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.split-section-col {
+  flex: 1 1 300px;
+  min-width: 300px;
+}
