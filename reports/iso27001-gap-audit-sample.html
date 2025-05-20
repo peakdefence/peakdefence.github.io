@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Fonts for Hugo-like look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WINGMAN ISO 27001 GAP Audit Report Sample</title>
+  <style>
+/* Embedded from assets/css/main.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap');
+:root {
+  --color-intelligence-blue: 63, 61, 86;
+  --color-intelligence-blue-light: 110, 108, 137;
+  --color-intelligence-blue-dark: 44, 42, 63;
+}
+body { font-family: 'Inter', Arial, Helvetica, sans-serif !important; background: #fff; color: #000; }
+h1, h2, h3, h4, h5, h6, .section-title { font-family: 'Roboto Slab', 'Inter', Arial, Helvetica, sans-serif !important; font-weight: 600; }
+.section-title { color: #3F3D56; font-size: 1.5em; font-weight: bold; margin-bottom: 12px; }
+.section-subtitle { color: #CC002E; font-size: 1.1em; margin-bottom: 8px; }
+.card { border-radius: 8px; background: #fff; box-shadow: 0 1px 4px #eee; margin-bottom: 24px; padding: 20px; }
+.tab-nav { display: flex; gap: 12px; margin-bottom: 24px; }
+.tab-nav button { background: none; border: none; color: #3F3D56; font-size: 1.1em; padding: 10px 18px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s; }
+.tab-nav button.active { background: #f1f5f9; color: #CC002E; font-weight: bold; }
+.tab-content { padding: 24px 0; }
+.icon-box { display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; padding: 6px; margin-right: 10px; vertical-align: middle; }
+.badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: 0.85em; margin-left: 8px; }
+.badge-mandatory { background: #CC002E; color: #fff; }
+.badge-optional { background: #3F3D56; color: #fff; }
+.gantt-chart { overflow-x: auto; margin-top: 16px; padding-bottom: 8px; }
+.gantt-bar { background: #e8eaf6; border-radius: 6px; margin-bottom: 14px; padding: 10px 18px 10px 10px; display: flex; align-items: center; box-shadow: 0 1px 2px #eee; position: relative; min-width: 180px; transition: box-shadow 0.2s; }
+.gantt-bar.regular { border-left: 5px solid #3F3D56; }
+.gantt-bar.one-off { border-left: 5px solid #CC002E; }
+.gantt-label { font-weight: 600; color: #3F3D56; font-size: 1.12em; text-decoration: underline; cursor: pointer; }
+.gantt-dependency { width: 22px; height: 2.2px; background: #b0b7c3; display: inline-block; margin-right: 10px; border-radius: 1px; }
+.gantt-bar:hover { box-shadow: 0 4px 16px #e3e6f0; }
+@media (max-width: 700px) { .gantt-bar { font-size: 0.96em; min-width: 120px; padding: 8px 10px 8px 8px; } .gantt-label { font-size: 1em; } }
+.toggle-view { margin-bottom: 16px; }
+.ref-link { color: #3F3D56; text-decoration: underline; cursor: pointer; }
+.requirement-badge { background: #3F3D56; color: #fff; border-radius: 4px; padding: 2px 6px; font-size: 0.9em; margin-right: 6px; }
+@media (max-width: 700px) { .tab-content { padding: 0; } .gantt-bar { font-size: 0.95em; } }
+footer { background:#f1f5f9; color:#3F3D56; text-align:center; padding: 24px 0 12px 0; margin-top:40px; font-size:0.97em; border-top: 1px solid #e0e0e0; }
+</style>
+  <style>
+    .activity-card-min { transition: box-shadow 0.2s; }
+    .activity-card-min[aria-expanded="true"] { box-shadow: 0 4px 16px #eee; border: 1.5px solid #3F3D56; }
+    .expand-btn { display: flex; align-items: center; justify-content: center; }
+    .chevron { transition: transform 0.3s; }
+    body, .font-sans, .font-body, .section-title, .section-subtitle, .tab-content, .card, .gantt-bar, .badge, .requirement-badge, .activity-details, .ref-link, .doc-link, .interview-link {
+      font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+    }
+    h1, h2, h3, h4, h5, h6, .section-title {
+      font-family: 'Roboto Slab', 'Inter', Arial, Helvetica, sans-serif !important;
+      font-weight: 600;
+    }
+    body { background: #fff; color: #000; }
+    .tab-nav { display: flex; gap: 12px; margin-bottom: 24px; }
+    .tab-nav button { background: none; border: none; color: #3F3D56; font-size: 1.1em; padding: 10px 18px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s; }
+    .tab-nav button.active { background: #f1f5f9; color: #CC002E; font-weight: bold; }
+    .tab-content { padding: 24px 0; }
+    .card { border-radius: 8px; background: #fff; box-shadow: 0 1px 4px #eee; margin-bottom: 24px; padding: 20px; }
+    .icon-box { display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; padding: 6px; margin-right: 10px; vertical-align: middle; }
+    .badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: 0.85em; margin-left: 8px; }
+    .badge-mandatory { background: #CC002E; color: #fff; }
+    .badge-optional { background: #3F3D56; color: #fff; }
+    .gantt-chart { overflow-x: auto; margin-top: 16px; padding-bottom: 8px; }
+    .gantt-bar { background: #e8eaf6; border-radius: 6px; margin-bottom: 14px; padding: 10px 18px 10px 10px; display: flex; align-items: center; box-shadow: 0 1px 2px #eee; position: relative; min-width: 180px; transition: box-shadow 0.2s; }
+    .gantt-bar.regular { border-left: 5px solid #3F3D56; }
+    .gantt-bar.one-off { border-left: 5px solid #CC002E; }
+    .gantt-label { font-weight: 600; color: #3F3D56; font-size: 1.12em; text-decoration: underline; cursor: pointer; }
+    .gantt-dependency { width: 22px; height: 2.2px; background: #b0b7c3; display: inline-block; margin-right: 10px; border-radius: 1px; }
+    .gantt-bar:hover { box-shadow: 0 4px 16px #e3e6f0; }
+    @media (max-width: 700px) {
+      .gantt-bar { font-size: 0.96em; min-width: 120px; padding: 8px 10px 8px 8px; }
+      .gantt-label { font-size: 1em; }
+    }
+    .toggle-view { margin-bottom: 16px; }
+    .ref-link { color: #3F3D56; text-decoration: underline; cursor: pointer; }
+    .section-title { color: #3F3D56; font-size: 1.5em; font-weight: bold; margin-bottom: 12px; }
+    .section-subtitle { color: #CC002E; font-size: 1.1em; margin-bottom: 8px; }
+    .requirement-badge { background: #3F3D56; color: #fff; border-radius: 4px; padding: 2px 6px; font-size: 0.9em; margin-right: 6px; }
+    @media (max-width: 700px) {
+      .tab-content { padding: 0; }
+      .gantt-bar { font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="section-title" style="font-size:2em;"><span style="vertical-align:middle;display:inline-block;max-height:64px;width:auto;"><?xml version='1.0' encoding='UTF-8'?><svg id='Layer_1' data-name='Layer 1' width='' height='40' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><defs><style> .cls-1 { fill: #af0032; } .cls-1, .cls-2 { stroke-width: 0px; } .cls-2 { fill: #fff; } </style></defs><circle class='cls-2' cx='127.76' cy='123.74' r='106.99'/><g><path class='cls-1' d='M127.76,82.59l82.83,108.88c15.1-18.45,24.17-42.02,24.17-67.72,0-59.09-47.9-106.99-106.99-106.99S20.76,64.65,20.76,123.74c0,35.21,17.01,66.44,43.26,85.94l63.74-127.09Z'/><path class='cls-1' d='M134.43,152.81l-35.95,73.84c9.31,2.64,19.12,4.09,29.27,4.09,19.61,0,37.97-5.3,53.78-14.51l-47.11-63.41Z'/></g></svg></span>&nbsp;WINGMAN ISO 27001 GAP Audit Report <span class="badge" style="background:#3F3D56;color:#fff;">Sample</span></h1>
+    <nav class="tab-nav" role="tablist">
+      <button id="tab-summary" class="active" role="tab" aria-selected="true">Executive Summary</button>
+      <button id="tab-findings" role="tab">Findings</button>
+      <button id="tab-activities" role="tab">What to do next?</button>
+      <button id="tab-technical" role="tab">Technical Data</button>
+      <button id="tab-requirements" role="tab">Requirements</button>
+    </nav>
+    <section id="content-summary" class="tab-content"></section>
+    <section id="content-findings" class="tab-content" hidden></section>
+    <section id="content-activities" class="tab-content" hidden></section>
+    <section id="content-technical" class="tab-content" hidden></section>
+    <section id="content-requirements" class="tab-content" hidden></section>
+  </div>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-nav button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(s => s.hidden = true);
+        document.getElementById('content-' + this.id.replace('tab-', '')).hidden = false;
+      });
+    });
+    // SVG ICONS
+    const icons = {
+      doc: `<svg width="22" height="22" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>`,
+      interview: `<svg width="22" height="22" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0"/></svg>`,
+      requirement: `<svg width="20" height="20" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg>`
+    };
+    let auditData = {};
+    fetch('iso27001-gap-audit-sample-data.json')
+      .then(r => r.json())
+      .then(json => {
+        auditData = json;
+        renderAll();
+      });
+    function renderAll() {
+      renderSummary();
+      renderFindings();
+      renderActivities();
+      renderTechnical();
+      renderRequirements();
+    }
+    function renderSummary() {
+      const d = auditData.executive_summary;
+      document.getElementById('content-summary').innerHTML = `
+        <div class="section-title">Executive Summary</div>
+        <div class="card">
+          <b>Organization:</b> ${d.organization}<br/>
+          <b>Business Context:</b> ${d.business_context}<br/>
+          <b>Security State:</b> ${d.security_state}<br/>
+          <b>Stakeholders:</b> <ul>${(d.stakeholders||[]).map(s=>`<li>${s}</li>`).join('')}</ul>
+          <b>Summary of Findings:</b> ${d.summary_of_findings}
+        </div>`;
+    }
+    function renderFindings() {
+      const findings = auditData.findings||[];
+      document.getElementById('content-findings').innerHTML = `
+        <div class="section-title">Findings</div>
+        <ul style="margin:0;padding:0;list-style:none;">
+        ${findings.map(f=>`<li class="card" style="margin-bottom:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="icon-box">${icons.requirement}</span>
+              <span style="font-size:1.1em;font-weight:bold;">${f.title}</span>
+            </div>
+            <div><b>Type:</b> ${f.type}</div>
+            <div style="margin:8px 0 8px 0;">${f.description}</div>
+            <div><b>Related Requirements:</b> ${(f.iso27001_requirements||[]).map(rid=>`<a class='ref-link' href='#requirement-${rid}'>${rid}</a>`).join(', ')}</div>
+            <div><b>Related Documents:</b> ${(f.related_documents||[]).map(did=>`<a class='ref-link' href='#doc-${did}'>${did}</a>`).join(', ')}</div>
+            <div><b>Related Interviews:</b> ${(f.related_interviews||[]).map(iid=>`<a class='ref-link' href='#interview-${iid}'>${iid}</a>`).join(', ')}</div>
+            <div><b>Related Activities:</b> ${(f.related_activities||[]).map(aid=>`<a class='ref-link' href='#activity-${aid}'>${aid}</a>`).join(', ')}</div>
+          </li>`).join('')}
+        </ul>`;
+    }
+    function renderActivities() {
+      const acts = auditData.activities||[];
+      document.getElementById('content-activities').innerHTML = `
+        <div class="section-title">Recommended Activities</div>
+        <ul style="margin:0;padding:0;list-style:none;">
+        ${acts.map(a=>`<li id="activity-${a.id}" class="card" style="margin-bottom:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="icon-box">${icons.requirement}</span>
+              <span style="font-size:1.1em;font-weight:bold;">${a.title}</span>
+            </div>
+            <div><b>Definition:</b> ${a.definition}</div>
+            <div><b>Context:</b> ${a.context_specific_explanation||''}</div>
+            <div><b>Definition of Done:</b> ${a.definition_of_done||''}</div>
+            <div><b>Accountable Role:</b> ${a.accountable_role||''}</div>
+            <div><b>ISO 27001 Relevance:</b> ${a.iso27001_relevance||''}</div>
+            <div><b>Subtasks:</b> <ul>${(a.subtasks||[]).map(st=>`<li>${st}</li>`).join('')}</ul></div>
+            <div><b>Effort Estimate (hours):</b> ${a.effort_estimate_hours||''}</div>
+            <div><b>Action Type:</b> ${a.action_type||''}</div>
+            <div><b>Mandatoriness:</b> ${a.mandatoriness||''}</div>
+            <div><b>Depends On:</b> ${(a.depends_on||[]).map(did=>`<a class='ref-link' href='#activity-${did}'>${did}</a>`).join(', ')}</div>
+            <div><b>Related Findings:</b> ${(a.related_findings||[]).map(fid=>`<a class='ref-link' href='#finding-${fid}'>${fid}</a>`).join(', ')}</div>
+          </li>`).join('')}
+        </ul>`;
+    }
+    function renderTechnical() {
+      const docs = auditData.documents;
+      const interviews = auditData.interviews;
+      const reqs = auditData.requirements;
+      document.getElementById('content-technical').innerHTML = `
+        <div class="section-title">Technical Data</div>
+        <div class="section-subtitle">List of Documents Analyzed</div>
+        <ul>${docs.map(doc=>`<li id="doc-${doc.id}"><span class="icon-box">${icons.doc}</span><b>${doc.title}</b>: ${doc.summary}<br/><span style="font-size:0.95em;">Covers: ${(doc.iso27001_requirements||[]).map(rid=>`<a class="requirement-badge requirement-link" href="#requirement-${rid}" title="${getRequirementTitle(rid)}">${rid}</a>`).join('')}</span></li>`).join('')}</ul>
+        <div class="section-subtitle" style="margin-top:20px;">List of Interviews &amp; Notes</div>
+        <ul>${interviews.map(intv=>`<li id="interview-${intv.id}"><span class="icon-box">${icons.interview}</span><b>${intv.subject}</b>${intv.date ? ` <span style='color:#3F3D56;font-weight:normal;'>(Date: ${intv.date}${intv.time ? `, Time: ${intv.time}` : ''})</span>` : ''}: ${intv.notes}</li>`).join('')}</ul>
+        <div class="section-subtitle" style="margin-top:20px;">ISO 27001 Requirements Analyzed</div>
+        <ul>${reqs.map(r=>`<li id="requirement-${r.id}"><span class="icon-box">${icons.requirement}</span><b>${r.id}:</b> ${r.title}<br/><span style="font-size:0.95em;">${r.description}</span></li>`).join('')}</ul>
+      `;
+    }
+    function renderRequirements() {
+      const reqs = auditData.requirements||[];
+      const findings = auditData.findings||[];
+      const acts = auditData.activities||[];
+      document.getElementById('content-requirements').innerHTML = `
+        <div class="section-title">Requirements Analyzed</div>
+        <ul style="margin:0;padding:0;list-style:none;">
+        ${reqs.map(r=>{
+          // Linked findings
+          const linkedFindings = findings.filter(f=> (f.iso27001_requirements||[]).includes(r.id));
+          // Linked activities
+          const linkedActs = acts.filter(a=>{
+            if(a.iso27001_relevance && a.iso27001_relevance.includes(r.id)) return true;
+            return false;
+          });
+          return `<li id="requirement-${r.id}" class="card" style="margin-bottom:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="icon-box">${icons.requirement}</span>
+              <span style="font-size:1.1em;font-weight:bold;">${r.id}: ${r.title}</span>
+            </div>
+            <div style="margin:8px 0 8px 0;">${r.description}</div>
+            <div><b>Linked Findings:</b> ${linkedFindings.length ? linkedFindings.map(f=>`<a class='ref-link' href='#finding-${f.id}'>${f.title}</a>`).join(', ') : '<span style="color:#888">None</span>'}</div>
+            <div><b>Linked Activities:</b> ${linkedActs.length ? linkedActs.map(a=>`<a class='ref-link' href='#activity-${a.id}'>${a.title}</a>`).join(', ') : '<span style="color:#888">None</span>'}</div>
+          </li>`;
+        }).join('')}
+        </ul>
+      `;
+    }
+    // Helper functions for cross-linking
+    function getRequirementTitle(id) {
+      const r = (auditData.requirements||[]).find(x=>x.id===id); return r?r.title:id;
+    }
+  </script>
+  <footer style="background:#f1f5f9; color:#3F3D56; text-align:center; padding: 24px 0 12px 0; margin-top:40px; font-size:0.97em; border-top: 1px solid #e0e0e0;">
+    <div>
+      &copy; 2025 Peak Defence. All rights reserved.<br>
+      Content provided by <b>Peak Defence</b> and created by <b>Wingman Security Office AI assistant</b>.
+    </div>
+  </footer>
+</body>
+</html>

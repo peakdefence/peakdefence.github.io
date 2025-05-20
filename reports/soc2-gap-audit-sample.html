@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Fonts for Hugo-like look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WINGMAN SOC 2 Type 2 GAP Audit Report Sample</title>
+  <style>
+/* Embedded from assets/css/main.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@600;700&display=swap');
+:root {
+  --color-intelligence-blue: 63, 61, 86;
+  --color-intelligence-blue-light: 110, 108, 137;
+  --color-intelligence-blue-dark: 44, 42, 63;
+}
+body { font-family: 'Inter', Arial, Helvetica, sans-serif !important; background: #fff; color: #000; }
+h1, h2, h3, h4, h5, h6, .section-title { font-family: 'Roboto Slab', 'Inter', Arial, Helvetica, sans-serif !important; font-weight: 600; }
+.section-title { color: #3F3D56; font-size: 1.5em; font-weight: bold; margin-bottom: 12px; }
+.section-subtitle { color: #CC002E; font-size: 1.1em; margin-bottom: 8px; }
+.card { border-radius: 8px; background: #fff; box-shadow: 0 1px 4px #eee; margin-bottom: 24px; padding: 20px; }
+.tab-nav { display: flex; gap: 12px; margin-bottom: 24px; }
+.tab-nav button { background: none; border: none; color: #3F3D56; font-size: 1.1em; padding: 10px 18px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s; }
+.tab-nav button.active { background: #f1f5f9; color: #CC002E; font-weight: bold; }
+.tab-content { padding: 24px 0; }
+.icon-box { display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; padding: 6px; margin-right: 10px; vertical-align: middle; }
+.badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: 0.85em; margin-left: 8px; }
+.badge-mandatory { background: #CC002E; color: #fff; }
+.badge-optional { background: #3F3D56; color: #fff; }
+.gantt-chart { overflow-x: auto; margin-top: 16px; padding-bottom: 8px; }
+.gantt-bar { background: #e8eaf6; border-radius: 6px; margin-bottom: 14px; padding: 10px 18px 10px 10px; display: flex; align-items: center; box-shadow: 0 1px 2px #eee; position: relative; min-width: 180px; transition: box-shadow 0.2s; }
+.gantt-bar.regular { border-left: 5px solid #3F3D56; }
+.gantt-bar.one-off { border-left: 5px solid #CC002E; }
+.gantt-label { font-weight: 600; color: #3F3D56; font-size: 1.12em; text-decoration: underline; cursor: pointer; }
+.gantt-dependency { width: 22px; height: 2.2px; background: #b0b7c3; display: inline-block; margin-right: 10px; border-radius: 1px; }
+.gantt-bar:hover { box-shadow: 0 4px 16px #e3e6f0; }
+@media (max-width: 700px) { .gantt-bar { font-size: 0.96em; min-width: 120px; padding: 8px 10px 8px 8px; } .gantt-label { font-size: 1em; } }
+.toggle-view { margin-bottom: 16px; }
+.ref-link { color: #3F3D56; text-decoration: underline; cursor: pointer; }
+.requirement-badge { background: #3F3D56; color: #fff; border-radius: 4px; padding: 2px 6px; font-size: 0.9em; margin-right: 6px; }
+@media (max-width: 700px) { .tab-content { padding: 0; } .gantt-bar { font-size: 0.95em; } }
+footer { background:#f1f5f9; color:#3F3D56; text-align:center; padding: 24px 0 12px 0; margin-top:40px; font-size:0.97em; border-top: 1px solid #e0e0e0; }
+</style>
+  <style>
+    .activity-card-min { transition: box-shadow 0.2s; }
+    .activity-card-min[aria-expanded="true"] { box-shadow: 0 4px 16px #eee; border: 1.5px solid #3F3D56; }
+    .expand-btn { display: flex; align-items: center; justify-content: center; }
+    .chevron { transition: transform 0.3s; }
+
+    body, .font-sans, .font-body, .section-title, .section-subtitle, .tab-content, .card, .gantt-bar, .badge, .requirement-badge, .activity-details, .ref-link, .doc-link, .interview-link {
+      font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+    }
+    h1, h2, h3, h4, h5, h6, .section-title {
+      font-family: 'Roboto Slab', 'Inter', Arial, Helvetica, sans-serif !important;
+      font-weight: 600;
+    }
+    body { background: #fff; color: #000; }
+    .tab-nav { display: flex; gap: 12px; margin-bottom: 24px; }
+    .tab-nav button { background: none; border: none; color: #3F3D56; font-size: 1.1em; padding: 10px 18px; border-radius: 6px 6px 0 0; cursor: pointer; transition: background 0.2s; }
+    .tab-nav button.active { background: #f1f5f9; color: #CC002E; font-weight: bold; }
+    .tab-content { padding: 24px 0; }
+    .card { border-radius: 8px; background: #fff; box-shadow: 0 1px 4px #eee; margin-bottom: 24px; padding: 20px; }
+    .icon-box { display: inline-flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; padding: 6px; margin-right: 10px; vertical-align: middle; }
+    .badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: 0.85em; margin-left: 8px; }
+    .badge-mandatory { background: #CC002E; color: #fff; }
+    .badge-optional { background: #3F3D56; color: #fff; }
+    .gantt-chart { overflow-x: auto; margin-top: 16px; padding-bottom: 8px; }
+    .gantt-bar { background: #e8eaf6; border-radius: 6px; margin-bottom: 14px; padding: 10px 18px 10px 10px; display: flex; align-items: center; box-shadow: 0 1px 2px #eee; position: relative; min-width: 180px; transition: box-shadow 0.2s; }
+    .gantt-bar.regular { border-left: 5px solid #3F3D56; }
+    .gantt-bar.one-off { border-left: 5px solid #CC002E; }
+    .gantt-label { font-weight: 600; color: #3F3D56; font-size: 1.12em; text-decoration: underline; cursor: pointer; }
+    .gantt-dependency { width: 22px; height: 2.2px; background: #b0b7c3; display: inline-block; margin-right: 10px; border-radius: 1px; }
+    .gantt-bar:hover { box-shadow: 0 4px 16px #e3e6f0; }
+    @media (max-width: 700px) {
+      .gantt-bar { font-size: 0.96em; min-width: 120px; padding: 8px 10px 8px 8px; }
+      .gantt-label { font-size: 1em; }
+    }
+    .toggle-view { margin-bottom: 16px; }
+    .ref-link { color: #3F3D56; text-decoration: underline; cursor: pointer; }
+    .section-title { color: #3F3D56; font-size: 1.5em; font-weight: bold; margin-bottom: 12px; }
+    .section-subtitle { color: #CC002E; font-size: 1.1em; margin-bottom: 8px; }
+    .requirement-badge { background: #3F3D56; color: #fff; border-radius: 4px; padding: 2px 6px; font-size: 0.9em; margin-right: 6px; }
+    @media (max-width: 700px) {
+      .tab-content { padding: 0; }
+      .gantt-bar { font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="section-title" style="font-size:2em;"><span style="vertical-align:middle;display:inline-block;max-height:64px;width:auto;"><?xml version='1.0' encoding='UTF-8'?><svg id='Layer_1' data-name='Layer 1' width='' height='40' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><defs><style> .cls-1 { fill: #af0032; } .cls-1, .cls-2 { stroke-width: 0px; } .cls-2 { fill: #fff; } </style></defs><circle class='cls-2' cx='127.76' cy='123.74' r='106.99'/><g><path class='cls-1' d='M127.76,82.59l82.83,108.88c15.1-18.45,24.17-42.02,24.17-67.72,0-59.09-47.9-106.99-106.99-106.99S20.76,64.65,20.76,123.74c0,35.21,17.01,66.44,43.26,85.94l63.74-127.09Z'/><path class='cls-1' d='M134.43,152.81l-35.95,73.84c9.31,2.64,19.12,4.09,29.27,4.09,19.61,0,37.97-5.3,53.78-14.51l-47.11-63.41Z'/></g></svg></span>&nbsp;WINGMAN SOC 2 Type 2 GAP Audit Report <span class="badge" style="background:#3F3D56;color:#fff;">Sample</span></h1>
+    <nav class="tab-nav" role="tablist">
+      <button id="tab-summary" class="active" role="tab" aria-selected="true">Executive Summary</button>
+      <button id="tab-findings" role="tab">Findings</button>
+      <button id="tab-activities" role="tab">What to do next?</button>
+      <button id="tab-requirements" role="tab">Requirements Analyzed</button>
+      <button id="tab-technical" role="tab">Technical Data</button>
+    </nav>
+    <section id="content-summary" class="tab-content"></section>
+    <section id="content-findings" class="tab-content" hidden></section>
+    <section id="content-activities" class="tab-content" hidden></section>
+    <section id="content-requirements" class="tab-content" hidden></section>
+    <section id="content-technical" class="tab-content" hidden></section>
+  </div>
+  <script>
+    // Helper: Switch tab and scroll to target
+    function goToTabAndScroll(tab, targetId) {
+      document.querySelectorAll('.tab-nav button').forEach(b=>b.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(s=>s.hidden = true);
+      document.getElementById('content-' + tab).hidden = false;
+      setTimeout(()=> {
+        const el = document.getElementById(targetId);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 100); // Wait for render
+    }
+    // Event delegation for all dynamic links
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('.ref-link, .doc-link, .interview-link, .requirement-link');
+      if(a) {
+        e.preventDefault();
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#activity-')) {
+          goToTabAndScroll('activities', href.slice(1));
+        } else if(href.startsWith('#doc-')) {
+          goToTabAndScroll('technical', href.slice(1));
+        } else if(href.startsWith('#interview-')) {
+          goToTabAndScroll('technical', href.slice(1));
+        } else if(href.startsWith('#finding-')) {
+          goToTabAndScroll('findings', href.slice(1));
+        } else if(href.startsWith('#requirement-')) {
+          goToTabAndScroll('requirements', href.slice(1));
+        }
+      }
+    });
+    let auditData = {};
+    fetch('soc2-gap-audit-sample-data.json')
+      .then(r => r.json())
+      .then(json => {
+        auditData = json;
+        renderAll();
+      });
+    // Tab switching
+    document.querySelectorAll('.tab-nav button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(s => s.hidden = true);
+        document.getElementById('content-' + this.id.replace('tab-', '')).hidden = false;
+      });
+    });
+    // SVG ICONS
+    const icons = {
+      nonconformity: `<svg width="26" height="26" fill="none" stroke="#CC002E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="14"/><circle cx="12" cy="17" r="1"/></svg>`,
+      opportunity: `<svg width="26" height="26" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>`,
+      activity: `<svg width="26" height="26" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg>`,
+      doc: `<svg width="22" height="22" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 2v4a2 2 0 0 0 2 2h4"/></svg>`,
+      interview: `<svg width="22" height="22" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0"/></svg>`,
+      requirement: `<svg width="20" height="20" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg>`
+    };
+    function renderAll() {
+      renderSummary();
+      renderFindings();
+      renderActivities();
+      renderTechnical();
+      renderRequirements();
+    }
+    function renderSummary() {
+      const d = auditData.executive_summary;
+      // Dashboard calculations
+      const reqCount = (auditData.requirements||[]).length;
+      const findings = auditData.findings||[];
+      const conformity = findings.filter(f=>f.type==="Conformity").length;
+      const nonconformity = findings.filter(f=>f.type==="Non-conformity").length;
+      const opportunity = findings.filter(f=>f.type==="Opportunity for Improvement").length;
+      const acts = auditData.activities||[];
+      const actionsMandatory = acts.filter(a=>a.mandatoriness.toLowerCase().includes('mandatory')).length;
+      const actionsOptional = acts.length - actionsMandatory;
+      document.getElementById('content-summary').innerHTML = `
+        <div class="dashboard" style="display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;">
+          <div class="dashboard-card" style="flex:1 1 160px;min-width:160px;background:#f7fafc;border-radius:12px;padding:18px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px #eee;">
+            <span class="icon-box" style="background:#fff;">${icons.requirement}</span>
+            <div>
+              <div style="font-size:2em;font-weight:700;color:#3F3D56;">${reqCount}</div>
+              <div style="font-size:1em;color:#3F3D56;">Requirements</div>
+            </div>
+          </div>
+          <div class="dashboard-card" style="flex:1 1 160px;min-width:160px;background:#fff0f3;border-radius:12px;padding:18px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px #eee;">
+            <span class="icon-box" style="background:#fff;"><svg width="26" height="26" fill="none" stroke="#CC002E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="14"/><circle cx="12" cy="17" r="1"/></svg></span>
+            <div>
+              <div style="font-size:2em;font-weight:700;color:#CC002E;">${nonconformity}</div>
+              <div style="font-size:1em;color:#CC002E;">Nonconformities</div>
+            </div>
+          </div>
+          <div class="dashboard-card" style="flex:1 1 160px;min-width:160px;background:#f6f7ff;border-radius:12px;padding:18px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px #eee;">
+            <span class="icon-box" style="background:#fff;"><svg width="26" height="26" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <div>
+              <div style="font-size:2em;font-weight:700;color:#3F3D56;">${opportunity}</div>
+              <div style="font-size:1em;color:#3F3D56;">Opportunities</div>
+            </div>
+          </div>
+          <div class="dashboard-card" style="flex:1 1 160px;min-width:160px;background:#f7fafc;border-radius:12px;padding:18px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px #eee;">
+            <span class="icon-box" style="background:#fff;"><svg width="26" height="26" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg></span>
+            <div>
+              <div style="font-size:2em;font-weight:700;color:#3F3D56;">${actionsMandatory}</div>
+              <div style="font-size:1em;color:#3F3D56;">Mandatory Actions</div>
+            </div>
+          </div>
+          <div class="dashboard-card" style="flex:1 1 160px;min-width:160px;background:#f7fafc;border-radius:12px;padding:18px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px #eee;">
+            <span class="icon-box" style="background:#fff;"><svg width="26" height="26" fill="none" stroke="#3F3D56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg></span>
+            <div>
+              <div style="font-size:2em;font-weight:700;color:#3F3D56;">${actionsOptional}</div>
+              <div style="font-size:1em;color:#3F3D56;">Optional Actions</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Executive Summary</div>
+          <div><span class="section-subtitle">Organization:</span> <strong>${d.organization}</strong></div>
+          <div style="margin:8px 0;"><span class="section-subtitle">Business Context:</span> ${d.business_context}</div>
+          <div style="margin:8px 0;"><span class="section-subtitle">State of Security:</span> ${d.security_state}</div>
+          <div style="margin:8px 0;"><span class="section-subtitle">Stakeholders:</span> <ul>${d.stakeholders.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+          <div style="margin:8px 0;"><span class="section-subtitle">Summary of Findings:</span> ${d.summary_of_findings}</div>
+        </div>`;
+    }
+    function renderFindings() {
+      const findings = auditData.findings;
+      const requirements = Object.fromEntries((auditData.requirements||[]).map(r=>[r.id,r]));
+      document.getElementById('content-findings').innerHTML = `
+        <div class="section-title">Audit Findings</div>
+        ${findings.map(f=>`<div class="card" id="finding-${f.id}">
+          <span class="icon-box">${f.type==="Non-conformity"?icons.nonconformity:icons.opportunity}</span>
+          <span style="font-size:1.15em;font-weight:bold;">${f.title}</span>
+          <span class="badge ${f.type==="Non-conformity"?'badge-mandatory':'badge-optional'}">
+            ${f.type}
+          </span>
+          <div style="margin:8px 0 0 0;">${f.description}</div>
+          <div class="activity-details">
+            <span class="section-subtitle">SOC 2 Requirement(s):</span>
+            ${f.soc2_requirements.map(rid=>`<a class="requirement-badge requirement-link" href="#requirement-${rid}" title="${requirements[rid]?.title||rid}">${rid}</a>`).join('')}
+          </div>
+          <div class="activity-details">
+            <span class="section-subtitle">Related Activities:</span>
+            <ul>${(f.related_activities||[]).map(aid=>`<li><a class="ref-link" href="#activity-${aid}">${getActivityTitle(aid)}</a></li>`).join('')}</ul>
+          </div>
+          <div class="activity-details">
+            <span class="section-subtitle">References:</span>
+            <ul>
+              ${(f.related_documents||[]).map(did=>`<li><span class="icon-box">${icons.doc}</span><a class="doc-link" href="#doc-${did}">${getDocTitle(did)}</a></li>`).join('')}
+              ${(f.related_interviews||[]).map(iid=>`<li><span class="icon-box">${icons.interview}</span><a class="interview-link" href="#interview-${iid}">${getInterviewSubject(iid)}</a></li>`).join('')}
+            </ul>
+          </div>
+        </div>`).join('')}
+      `;
+    }
+    function renderActivities() {
+      const activities = auditData.activities;
+      const findings = Object.fromEntries((auditData.findings||[]).map(f=>[f.id,f]));
+      let listView = true;
+      const container = document.getElementById('content-activities');
+      container.innerHTML = `
+        <div class="section-title">Activities
+          <span class="toggle-view" style="float:right;">
+            <button id="toggle-list" class="btn btn-outline" style="margin-right:8px;">List View</button>
+            <button id="toggle-gantt" class="btn btn-outline">Gantt Chart</button>
+          </span>
+        </div>
+        <div id="activity-list-view"></div>
+        <div id="activity-gantt-view" style="display:none;"></div>
+      `;
+      document.getElementById('toggle-list').onclick = function() {
+        document.getElementById('activity-list-view').style.display = '';
+        document.getElementById('activity-gantt-view').style.display = 'none';
+      };
+      document.getElementById('toggle-gantt').onclick = function() {
+        document.getElementById('activity-list-view').style.display = 'none';
+        document.getElementById('activity-gantt-view').style.display = '';
+        renderGantt();
+      };
+      renderActivityList();
+      function renderActivityList() {
+        const container = document.getElementById('activity-list-view');
+        container.innerHTML = activities.map(a=>`
+          <div class="card activity-card-min" id="activity-${a.id}" tabindex="0" aria-expanded="false">
+            <div class="activity-min-header" style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span class="icon-box">${icons.activity}</span>
+              <span style="font-size:1.12em;font-weight:bold;flex:1 1 auto;">${a.title}</span>
+              <span class="badge ${a.mandatoriness.toLowerCase().includes('mandatory')?'badge-mandatory':'badge-optional'}">${a.mandatoriness}</span>
+              <button class="expand-btn" aria-label="Expand details" style="background:none;border:none;cursor:pointer;padding:4px;outline:none;">
+                <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3F3D56" stroke-width="2"><polyline points="6 8 10 12 14 8"/></svg>
+              </button>
+            </div>
+            <div class="activity-details-expand" style="display:none;overflow:hidden;transition:max-height 0.3s;">
+              <div class="activity-details"><b>Definition:</b> ${a.definition}</div>
+              <div class="activity-details"><b>Company Context:</b> ${a.context_specific_explanation}</div>
+              <div class="activity-details"><b>Definition of Done:</b> ${a.definition_of_done}</div>
+              <div class="activity-details"><b>Accountable Role:</b> ${a.accountable_role}</div>
+              <div class="activity-details"><b>Relevance to SOC 2:</b> ${(a.soc2_relevance||'').replace(/(CC\d+\.\d+)/g, (m)=>`<a class='requirement-badge requirement-link' href='#requirement-${m}'>${m}</a>`)}</div>
+              <div class="activity-details"><b>Effort Estimate:</b> ${a.effort_estimate_hours} hours</div>
+              <div class="activity-details"><b>Action Type:</b> ${a.action_type==='regular'?'Regular (recurring)':'One-off'}</div>
+              <div class="activity-details"><b>Subtasks:</b><ul>${a.subtasks.map(st=>`<li>${st}</li>`).join('')}</ul></div>
+              <div class="activity-details"><b>Related Findings:</b> ${(a.related_findings||[]).map(fid=>`<a class="ref-link" href="#finding-${fid}">${findings[fid]?.title||fid}</a>`).join(', ')}</div>
+              <div class="activity-details"><b>Depends on:</b> ${(a.depends_on||[]).length? a.depends_on.map(did=>`<a class="ref-link" href="#activity-${did}">${getActivityTitle(did)}</a>`).join(', ') : 'None'}</div>
+            </div>
+          </div>
+        `).join('');
+        // Expand/collapse logic
+        container.querySelectorAll('.activity-min-header, .expand-btn').forEach(el => {
+          el.addEventListener('click', function(e) {
+            const card = this.closest('.activity-card-min');
+            if (!card) return;
+            // Collapse all others
+            container.querySelectorAll('.activity-card-min').forEach(c => {
+              if (c !== card) {
+                c.setAttribute('aria-expanded','false');
+                c.querySelector('.activity-details-expand').style.display = 'none';
+                c.querySelector('.chevron').style.transform = '';
+              }
+            });
+            // Toggle this one
+            const expanded = card.getAttribute('aria-expanded') === 'true';
+            card.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            const details = card.querySelector('.activity-details-expand');
+            details.style.display = expanded ? 'none' : 'block';
+            card.querySelector('.chevron').style.transform = expanded ? '' : 'rotate(180deg)';
+          });
+        });
+        // Keyboard accessibility: expand/collapse on Enter/Space
+        container.querySelectorAll('.activity-card-min').forEach(card => {
+          card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.querySelector('.activity-min-header').click();
+            }
+          });
+        });
+      }
+      function renderGantt() {
+  // --- Gantt Timeline Calendar ---
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
+  const HOURS_PER_DAY = 8;
+  const today = new Date('2025-05-20'); // Use current day as timeline start
+
+  // Helper to add working days (skip weekends)
+  function addWorkingDays(date, days) {
+    let result = new Date(date);
+    while (days > 0) {
+      result.setDate(result.getDate() + 1);
+      // 0 = Sunday, 6 = Saturday
+      if (result.getDay() !== 0 && result.getDay() !== 6) {
+        days--;
+      }
+    }
+    return result;
+  }
+
+  // Calculate activity schedule
+  const activityMap = Object.fromEntries(activities.map(a => [a.id, a]));
+  const activitySchedule = {};
+  function getActivityDates(act) {
+    if (activitySchedule[act.id]) return activitySchedule[act.id];
+    let start = new Date(today);
+    // If dependencies, start after the latest dependency's end
+    if (Array.isArray(act.depends_on) && act.depends_on.length) {
+      let maxEnd = new Date(today);
+      act.depends_on.forEach(depId => {
+        const depAct = activityMap[depId];
+        if (depAct) {
+          const depDates = getActivityDates(depAct);
+          if (depDates.end > maxEnd) maxEnd = new Date(depDates.end);
+        }
+      });
+      start = addWorkingDays(maxEnd, 1); // Start next working day after max dependency
+    }
+    // Duration in working days
+    const durationDays = Math.ceil((act.effort_estimate_hours || 8) / HOURS_PER_DAY);
+    const end = addWorkingDays(start, durationDays - 1);
+    activitySchedule[act.id] = { start, end };
+    return activitySchedule[act.id];
+  }
+
+  // Calculate all activity dates
+  activities.forEach(getActivityDates);
+
+  // Find timeline range
+  let minDate = new Date(today), maxDate = new Date(today);
+  Object.values(activitySchedule).forEach(({start, end}) => {
+    if (start < minDate) minDate = start;
+    if (end > maxDate) maxDate = end;
+  });
+
+  // Build calendar axis (working days only)
+  let calendarDates = [];
+  let cursor = new Date(minDate);
+  while (cursor <= maxDate) {
+    if (cursor.getDay() !== 0 && cursor.getDay() !== 6) {
+      calendarDates.push(new Date(cursor));
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  // Render calendar header
+  const calendarHeader = `<div style="display:flex;gap:0;align-items:center;margin-bottom:8px;">
+    <div style="width:180px;"></div>
+    ${calendarDates.map(d => `<div style="flex:0 0 60px;text-align:center;font-size:0.98em;color:#888;">${d.toISOString().slice(5,10)}</div>`).join('')}
+  </div>`;
+
+  // Render bars positioned on timeline
+  const bars = activities.map(a => {
+    const { start, end } = activitySchedule[a.id];
+    const startIdx = calendarDates.findIndex(d => d.toDateString() === start.toDateString());
+    const endIdx = calendarDates.findIndex(d => d.toDateString() === end.toDateString());
+    const barLen = endIdx - startIdx + 1;
+    let depBar = '';
+    if ((a.depends_on||[]).length) depBar = a.depends_on.map(did => `<span class="gantt-dependency" title="Depends on ${getActivityTitle(did)}"></span>`).join('');
+    return `<div class="gantt-bar ${a.action_type}" style="margin-left:${startIdx*60}px;width:${barLen*60}px;position:relative;" id="gantt-${a.id}">
+      ${depBar}
+      <span class="gantt-label" data-activity-id="${a.id}">${a.title} (${a.effort_estimate_hours}h)</span>
+      <span style="position:absolute;right:6px;bottom:2px;font-size:0.9em;color:#888;">${start.toISOString().slice(5,10)}→${end.toISOString().slice(5,10)}</span>
+    </div>`;
+  }).join('');
+
+  // Render bars container with relative positioning for SVG overlay
+  const chartHtml = `<div class="gantt-chart" style="position:relative;">${calendarHeader}${bars}<svg id="gantt-arrows" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"></svg></div>`;
+  document.getElementById('activity-gantt-view').innerHTML = chartHtml;
+
+  // Draw SVG arrows for dependencies
+  setTimeout(() => {
+    const svg = document.getElementById('gantt-arrows');
+    if (!svg) return;
+    svg.innerHTML = '';
+    activities.forEach(a => {
+      if (Array.isArray(a.depends_on)) {
+        a.depends_on.forEach(depId => {
+          const fromBar = document.getElementById('gantt-' + depId);
+          const toBar = document.getElementById('gantt-' + a.id);
+          if (fromBar && toBar) {
+            const fromRect = fromBar.getBoundingClientRect();
+            const toRect = toBar.getBoundingClientRect();
+            const parentRect = svg.parentElement.getBoundingClientRect();
+            // Arrow from right-middle of fromBar to left-middle of toBar
+            const x1 = fromRect.right - parentRect.left;
+            const y1 = fromRect.top - parentRect.top + fromRect.height/2;
+            const x2 = toRect.left - parentRect.left;
+            const y2 = toRect.top - parentRect.top + toRect.height/2;
+            svg.innerHTML += `<line x1="${x1}" y1="${y1}" x2="${x2-8}" y2="${y2}" stroke="#CC002E" stroke-width="2" marker-end="url(#arrowhead)" />`;
+          }
+        });
+      }
+    });
+    // Add arrowhead marker
+    svg.innerHTML = `<defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" markerUnits="strokeWidth"><polygon points="0 0, 10 3.5, 0 7" fill="#CC002E"/></marker></defs>` + svg.innerHTML;
+  }, 0);
+
+  // Make Gantt labels clickable: open/scroll to activity card in list view
+  document.querySelectorAll('.gantt-label').forEach(lbl => {
+    lbl.addEventListener('click', function() {
+      document.getElementById('toggle-list').click();
+      setTimeout(()=>{
+        const card = document.getElementById('activity-' + this.dataset.activityId);
+        if(card) card.scrollIntoView({behavior:'smooth', block:'center'});
+        card && card.focus && card.focus();
+      }, 180);
+    });
+  });
+}
+
+    }
+    function renderTechnical() {
+      const docs = auditData.documents;
+      const interviews = auditData.interviews;
+      const reqs = auditData.requirements;
+      document.getElementById('content-technical').innerHTML = `
+        <div class="section-title">Technical Data</div>
+        <div class="section-subtitle">List of Documents Analyzed</div>
+        <ul>${docs.map(doc=>`<li id="doc-${doc.id}"><span class="icon-box">${icons.doc}</span><b>${doc.title}</b>: ${doc.summary}<br/><span style="font-size:0.95em;">Covers: ${(doc.soc2_requirements||[]).map(rid=>`<a class="requirement-badge requirement-link" href="#requirement-${rid}" title="${getRequirementTitle(rid)}">${rid}</a>`).join('')}</span></li>`).join('')}</ul>
+        <div class="section-subtitle" style="margin-top:20px;">List of Interviews &amp; Notes</div>
+        <ul>${interviews.map(intv=>`<li id="interview-${intv.id}"><span class="icon-box">${icons.interview}</span><b>${intv.subject}</b>${intv.date ? ` <span style='color:#3F3D56;font-weight:normal;'>(Date: ${intv.date}${intv.time ? `, Time: ${intv.time}` : ''})</span>` : ''}: ${intv.notes}</li>`).join('')}</ul>
+        <div class="section-subtitle" style="margin-top:20px;">SOC 2 Requirements Analyzed</div>
+        <ul>${reqs.map(r=>`<li id="requirement-${r.id}"><span class="icon-box">${icons.requirement}</span><b>${r.id}:</b> ${r.title}<br/><span style="font-size:0.95em;">${r.description}</span></li>`).join('')}</ul>
+      `;
+    }
+    function renderRequirements() {
+      const reqs = auditData.requirements||[];
+      const findings = auditData.findings||[];
+      const acts = auditData.activities||[];
+      document.getElementById('content-requirements').innerHTML = `
+        <div class="section-title">Requirements Analyzed</div>
+        <ul style="margin:0;padding:0;list-style:none;">
+        ${reqs.map(r=>{
+          // Linked findings
+          const linkedFindings = findings.filter(f=> (f.soc2_requirements||[]).includes(r.id));
+          // Linked activities
+          const linkedActs = acts.filter(a=>{
+            // Check in soc2_relevance or in any soc2_requirements array
+            if(a.soc2_relevance && a.soc2_relevance.includes(r.id)) return true;
+            if(Array.isArray(a.soc2_requirements) && a.soc2_requirements.includes(r.id)) return true;
+            return false;
+          });
+          return `<li id="requirement-${r.id}" class="card" style="margin-bottom:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="icon-box">${icons.requirement}</span>
+              <span style="font-size:1.1em;font-weight:bold;">${r.id}: ${r.title}</span>
+            </div>
+            <div style="margin:8px 0 8px 0;">${r.description}</div>
+            <div><b>Linked Findings:</b> ${linkedFindings.length ? linkedFindings.map(f=>`<a class='ref-link' href='#finding-${f.id}'>${f.title}</a>`).join(', ') : '<span style="color:#888">None</span>'}</div>
+            <div><b>Linked Activities:</b> ${linkedActs.length ? linkedActs.map(a=>`<a class='ref-link' href='#activity-${a.id}'>${a.title}</a>`).join(', ') : '<span style="color:#888">None</span>'}</div>
+          </li>`;
+        }).join('')}
+        </ul>
+      `;
+    }
+    // Helper functions for cross-linking
+    function getActivityTitle(id) {
+      const a = (auditData.activities||[]).find(x=>x.id===id); return a?a.title:id;
+    }
+    function getDocTitle(id) {
+      const d = (auditData.documents||[]).find(x=>x.id===id); return d?d.title:id;
+    }
+    function getInterviewSubject(id) {
+      const i = (auditData.interviews||[]).find(x=>x.id===id); return i?i.subject:id;
+    }
+    function getRequirementTitle(id) {
+      const r = (auditData.requirements||[]).find(x=>x.id===id); return r?r.title:id;
+    }
+  </script>
+  <footer style="background:#f1f5f9; color:#3F3D56; text-align:center; padding: 24px 0 12px 0; margin-top:40px; font-size:0.97em; border-top: 1px solid #e0e0e0;">
+    <div>
+      &copy; 2025 Peak Defence. All rights reserved.<br>
+      Content provided by <b>Peak Defence</b> and created by <b>Wingman Security Office AI assistant</b>.
+    </div>
+  </footer>
+</body>
+</html>
