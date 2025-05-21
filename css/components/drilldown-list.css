@@ -1,0 +1,36 @@
+/* Drilldown List Styles for Hugo/AlpineJS */
+.drilldown-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.drilldown-list-item {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 0.5rem;
+}
+.drilldown-trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2563eb;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drilldown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.drilldown-content-inner {
+  padding: 1rem 0;
+  color: #374151;
+}
+.drilldown-list-item[aria-expanded="true"] .drilldown-content {
+  max-height: 1000px;
+}

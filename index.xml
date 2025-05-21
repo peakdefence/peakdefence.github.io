@@ -188,9 +188,8 @@ Users have the option to run a local version of the Services on AWS, or for Ente
 &lt;h2 id="easy-3-step-process">Easy 3-Step Process&lt;/h2>
 &lt;!-- (4) Visual representation of the 3 step process -->
 &lt;div style="text-align:center; margin:30px 0; border:1px solid #eee; border-radius:8px; padding:20px; background-color:#f9f9f9;">
-&lt;table id="steps-table" width="100%" border="0" cellspacing="0" cellpadding="0">
-&lt;tr>
-&lt;td class="step-col" data-step="step1" align="center" width="33%" style="padding:20px; cursor:pointer;">
+&lt;div id="steps-container" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+&lt;div class="step-col" data-step="step1" style="flex:1; min-width:240px; text-align:center; padding:20px; cursor:pointer; border-radius:8px; transition:all 0.3s ease;">
 &lt;span style="display:inline-flex; align-items:center; justify-content:center; margin-bottom:8px; background:#f1f5f9; border-radius:8px; padding:8px;">&lt;svg width="32" height="32" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">&lt;path d="M12 19V6M8 10l4-4 4 4"/>&lt;rect x="4" y="19" width="16" height="2" rx="1"/>&lt;/svg>&lt;/span>
 &lt;h3 style="margin:10px 0;">Step 1: Upload&lt;/h3>
 &lt;p>Submit your security documents securely&lt;/p></description></item><item><title>Peak Defence Methodology</title><link>https://peakdefence.com/methodology/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://peakdefence.com/methodology/</guid><description>&lt;h2 id="introduction-a-balanced-approach-to-security">Introduction: A Balanced Approach to Security&lt;/h2>
