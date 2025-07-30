@@ -31,6 +31,8 @@ function applyConsentToGoogle(consent) {
     window.gtag('consent', 'update', {
       'ad_storage': consent.ads ? 'granted' : 'denied',
       'analytics_storage': consent.analytics ? 'granted' : 'denied',
+      'ad_user_data': consent.ads ? 'granted' : 'denied',
+      'ad_personalization': consent.ads ? 'granted' : 'denied',
       'functionality_storage': 'granted',
       'security_storage': 'granted',
     });
